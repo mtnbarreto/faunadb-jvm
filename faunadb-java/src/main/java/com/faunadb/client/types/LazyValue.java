@@ -6,8 +6,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.type.TypeFactory;
-import com.faunadb.client.response.*;
-import com.faunadb.client.response.Class;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 
@@ -107,70 +105,6 @@ public final class LazyValue implements Value {
   public Ref asRef() {
     try {
       return json.convertValue(underlying, Ref.class);
-    } catch (IllegalArgumentException ex) {
-      return null;
-    }
-  }
-
-  public Page asPage() {
-    try {
-      return json.convertValue(underlying, Page.class);
-    } catch (IllegalArgumentException ex) {
-      return null;
-    }
-  }
-
-  public Instance asInstance() {
-    try {
-      return json.convertValue(underlying, Instance.class);
-    } catch (IllegalArgumentException ex) {
-      return null;
-    }
-  }
-
-  public Key asKey() {
-    try {
-      return json.convertValue(underlying, Key.class);
-    } catch (IllegalArgumentException ex) {
-      return null;
-    }
-  }
-
-  public Token asToken() {
-    try {
-      return json.convertValue(underlying, Token.class);
-    } catch (IllegalArgumentException ex) {
-      return null;
-    }
-  }
-
-  public Database asDatabase() {
-    try {
-      return json.convertValue(underlying, Database.class);
-    } catch (IllegalArgumentException ex) {
-      return null;
-    }
-  }
-
-  public Class asClass() {
-    try {
-      return json.convertValue(underlying, Class.class);
-    } catch (IllegalArgumentException ex) {
-      return null;
-    }
-  }
-
-  public Index asIndex() {
-    try {
-      return json.convertValue(underlying, Index.class);
-    } catch (IllegalArgumentException ex) {
-      return null;
-    }
-  }
-
-  public Event asEvent() {
-    try {
-      return json.convertValue(underlying, Event.class);
     } catch (IllegalArgumentException ex) {
       return null;
     }

@@ -6,8 +6,6 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.node.NullNode;
 import com.faunadb.client.query.Language;
-import com.faunadb.client.response.*;
-import com.faunadb.client.response.Class;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 
@@ -107,53 +105,6 @@ public interface Value {
    */
   Set asSet();
 
-  /**
-   * Coerces this node into a {@link Page}.
-   * @return a Page, or null.
-   */
-  Page asPage();
-
-  /**
-   * Coerces this node into an {@link Instance}.
-   * @return an Instance, or null.
-   */
-  Instance asInstance();
-
-  /**
-   * Coerces this node into a {@link Key}.
-   * @return a Key, or null.
-   */
-  Key asKey();
-
-  /**
-   * Coerces this node into a {@link Token}.
-   * @return a Token, or null.
-   */
-  Token asToken();
-
-  /**
-   * Coerces this node into a {@link Database}.
-   * @return a Database, or null.
-   */
-  Database asDatabase();
-
-  /**
-   * Coerces this node into a {@link Class}.
-   * @return a Class, or null.
-   */
-  com.faunadb.client.response.Class asClass();
-
-  /**
-   * Coerces this node into an {@link Index}.
-   * @return an Index, or null.
-   */
-  Index asIndex();
-
-  /**
-   * Coerces this node into an {@link Event}.
-   * @return an Event, or null.
-   */
-  Event asEvent();
   Value get(String key);
   Value get(int index);
 
@@ -210,46 +161,6 @@ public interface Value {
 
     @Override
     public Value get(String key) {
-      return null;
-    }
-
-    @Override
-    public Page asPage() {
-      return null;
-    }
-
-    @Override
-    public Instance asInstance() {
-      return null;
-    }
-
-    @Override
-    public Key asKey() {
-      return null;
-    }
-
-    @Override
-    public Token asToken() {
-      return null;
-    }
-
-    @Override
-    public Database asDatabase() {
-      return null;
-    }
-
-    @Override
-    public Class asClass() {
-      return null;
-    }
-
-    @Override
-    public Index asIndex() {
-      return null;
-    }
-
-    @Override
-    public Event asEvent() {
       return null;
     }
 
