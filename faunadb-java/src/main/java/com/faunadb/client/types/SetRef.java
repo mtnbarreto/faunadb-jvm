@@ -11,15 +11,15 @@ import com.google.common.collect.ImmutableMap;
  * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#values-special_types">FaunaDB Special Types</a></p>
  *
  */
-@JsonDeserialize(using=Codec.SetDeserializer.class)
-public class Set {
-  public static Set create(ImmutableMap<String, Value> parameters) {
-    return new Set(parameters);
+@JsonDeserialize(using=Codec.SetRefDeserializer.class)
+public class SetRef {
+  public static SetRef create(ImmutableMap<String, Value> parameters) {
+    return new SetRef(parameters);
   }
 
   private final ImmutableMap<String, Value> parameters;
 
-  Set(ImmutableMap<String, Value> parameters) {
+  SetRef(ImmutableMap<String, Value> parameters) {
     this.parameters = parameters;
   }
 
@@ -29,6 +29,6 @@ public class Set {
 
   @Override
   public String toString() {
-    return "Set(" + parameters().toString() + ")";
+    return "SetRef(" + parameters().toString() + ")";
   }
 }

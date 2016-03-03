@@ -44,17 +44,17 @@ class Codec {
     }
   }
 
-  public static class SetDeserializer extends JsonDeserializer<Set> {
+  public static class SetRefDeserializer extends JsonDeserializer<SetRef> {
 
     @Override
-    public Set deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
+    public SetRef deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
       ObjectMapper json = (ObjectMapper) jsonParser.getCodec();
       TypeFactory tf = deserializationContext.getTypeFactory();
       JsonNode tree = json.readTree(jsonParser);
 
       if (tree.has("@set")) {
         ImmutableMap<String, Value> values = json.convertValue(tree.get("@set"), tf.constructMapLikeType(ImmutableMap.class, String.class, LazyValue.class));
-        return new Set(values);
+        return new SetRef(values);
       } else {
         throw new JsonParseException("Cannot deserialize as a @set", jsonParser.getTokenLocation());
       }

@@ -110,9 +110,9 @@ public final class LazyValue implements Value {
     }
   }
 
-  public Set asSet() {
+  public SetRef asSetRef() {
     try {
-      return json.convertValue(underlying, Set.class);
+      return json.convertValue(underlying, SetRef.class);
     } catch (IllegalArgumentException ex) {
       return null;
     }

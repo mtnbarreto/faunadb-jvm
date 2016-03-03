@@ -100,10 +100,10 @@ public interface Value {
   Ref asRef();
 
   /**
-   * Coerces this node into a {@link Set}.
-   * @return a Set, or null.
+   * Coerces this node into a {@link SetRef}.
+   * @return a SetRef, or null.
    */
-  Set asSet();
+  SetRef asSetRef();
 
   Value get(String key);
   Value get(int index);
@@ -165,7 +165,7 @@ public interface Value {
     }
 
     @Override
-    public Set asSet() {
+    public SetRef asSetRef() {
       return null;
     }
   }
