@@ -170,6 +170,8 @@ public interface Value {
     }
   }
 
+  abstract class ScalarValue extends ConcreteValue {}
+
   /**
    * Represents an Object value in the FaunaDB query language. Objects are polymorphic dictionaries.
    *
@@ -240,7 +242,7 @@ public interface Value {
       return new ObjectV(values);
     }
 
-    ObjectV(ImmutableMap<String, Value> values) {
+    public ObjectV(ImmutableMap<String, Value> values) {
       this.values = values;
     }
 
@@ -303,7 +305,7 @@ public interface Value {
       return new ArrayV(values);
     }
 
-    ArrayV(ImmutableList<Value> values) {
+    public ArrayV(ImmutableList<Value> values) {
       this.values = values;
     }
 
@@ -328,14 +330,14 @@ public interface Value {
    *
    * @see Language#BooleanV(boolean)
    */
-  final class BooleanV extends ConcreteValue {
+  final class BooleanV extends ScalarValue {
     private final Boolean value;
 
     public final static BooleanV True = BooleanV.create(true);
     public final static BooleanV False = BooleanV.create(false);
 
     public static BooleanV create(boolean value) {
-      return new BooleanV(value);
+      return value ? True : False;
     }
 
     @Override
@@ -368,7 +370,7 @@ public interface Value {
    *
    * @see Language#DoubleV(double)
    */
-  final class DoubleV extends ConcreteValue {
+  final class DoubleV extends ScalarValue {
     private final Double value;
 
     public static DoubleV create(double value) {
@@ -395,7 +397,7 @@ public interface Value {
     }
   }
 
-  final class LongV extends ConcreteValue {
+  final class LongV extends ScalarValue {
     private final Long value;
 
     public static LongV create(long value) {
@@ -422,7 +424,7 @@ public interface Value {
     }
   }
 
-  final class StringV extends ConcreteValue {
+  final class StringV extends ScalarValue {
     private final String value;
 
     public static StringV create(String value) {
@@ -465,7 +467,7 @@ public interface Value {
     }
   }
 
-  final class TsV extends ConcreteValue {
+  final class TsV extends ScalarValue {
     private final Instant value;
 
     public static TsV create(Instant value) {
@@ -495,7 +497,7 @@ public interface Value {
     }
   }
 
-  final class DateV extends ConcreteValue {
+  final class DateV extends ScalarValue {
     private final LocalDate value;
 
     public static DateV create(LocalDate value) {

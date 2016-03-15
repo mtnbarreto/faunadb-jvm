@@ -12,7 +12,7 @@ import com.google.common.collect.ImmutableMap;
  *
  */
 @JsonDeserialize(using=Codec.SetRefDeserializer.class)
-public class SetRef {
+public class SetRef extends Value.ScalarValue {
   public static SetRef create(ImmutableMap<String, Value> parameters) {
     return new SetRef(parameters);
   }
