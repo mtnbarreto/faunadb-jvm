@@ -174,9 +174,7 @@ public class SerializationSpec {
   @Test
   public void shouldSerializeIfExpression() throws Exception {
     assertJson(
-      If(Value(true))
-        .then(Value(true))
-        .elze(Value(false)),
+      If(Value(true), Value(true), Value(false)),
       "{\"if\":true,\"then\":true,\"else\":false}");
   }
 

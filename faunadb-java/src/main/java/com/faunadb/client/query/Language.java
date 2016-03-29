@@ -271,38 +271,13 @@ public final class Language {
     return Expr.fn("var", Value(variable));
   }
 
-
-  public static final class IfExpr {
-    public final class Then {
-      private final Expr then;
-
-      private Then(Expr then) {
-        this.then = then;
-      }
-
-      public Expr elze(Expr elze) {
-        return Expr.fn("if", condition, "then", then, "else", elze);
-      }
-    }
-
-    private final Expr condition;
-
-    IfExpr(Expr condition) {
-      this.condition = condition;
-    }
-
-    public Then then(Expr expr) {
-      return new Then(expr);
-    }
-  }
-
   /**
    * Creates a new If expression.
    *
    * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#basic_forms">FaunaDB Basic Forms</a>
    */
-  public static IfExpr If(Expr condition) {
-    return new IfExpr(condition);
+  public static Expr If(Expr condition, Expr thenExpr, Expr elseExpr) {
+    return Expr.fn("if", condition, "then", thenExpr, "else", elseExpr);
   }
 
   // /**
