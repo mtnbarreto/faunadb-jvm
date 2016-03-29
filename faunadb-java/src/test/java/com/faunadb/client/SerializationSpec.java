@@ -106,6 +106,63 @@ public class SerializationSpec {
   }
 
   @Test
+  public void shouldSerializeLetExpressions() throws Exception {
+    toJSON(
+      Let(
+        "v1", Value("x1")
+      ).in(
+        Var("x")
+      ), "{\"let\":{\"v1\":\"x1\"},\"in\":{\"var\":\"x\"}}");
+
+    toJSON(
+      Let(
+        "v1", Value("x1"),
+        "v2", Value("x2")
+      ).in(
+        Var("x")
+      ), "{\"let\":{\"v1\":\"x1\",\"v2\":\"x2\"},\"in\":{\"var\":\"x\"}}");
+
+    toJSON(
+      Let(
+        "v1", Value("x1"),
+        "v2", Value("x2"),
+        "v3", Value("x3")
+      ).in(
+        Var("x")
+      ), "{\"let\":{\"v1\":\"x1\",\"v2\":\"x2\",\"v3\":\"x3\"},\"in\":{\"var\":\"x\"}}");
+
+    toJSON(
+      Let(
+        "v1", Value("x1"),
+        "v2", Value("x2"),
+        "v3", Value("x3"),
+        "v4", Value("x4")
+      ).in(
+        Var("x")
+      ), "{\"let\":{\"v1\":\"x1\",\"v2\":\"x2\",\"v3\":\"x3\",\"v4\":\"x4\"},\"in\":{\"var\":\"x\"}}");
+
+    toJSON(
+      Let(
+        "v1", Value("x1"),
+        "v2", Value("x2"),
+        "v3", Value("x3"),
+        "v4", Value("x4"),
+        "v5", Value("x5")
+      ).in(
+        Var("x")
+      ), "{\"let\":{\"v1\":\"x1\",\"v2\":\"x2\",\"v3\":\"x3\",\"v4\":\"x4\",\"v5\":\"x5\"},\"in\":{\"var\":\"x\"}}");
+
+    toJSON(
+      Let(ImmutableMap.<String, Value>of(
+        "v1", Value("x1"),
+        "v2", Value("x2")
+      )
+      ).in(
+        Var("x")
+      ), "{\"let\":{\"v1\":\"x1\",\"v2\":\"x2\"},\"in\":{\"var\":\"x\"}}");
+  }
+
+  @Test
   @Ignore
   public void testSerializeSetExpr() throws Exception {
   }

@@ -223,8 +223,8 @@ public final class Language {
   public static class LetBinding {
     private final ImmutableMap<String, Value> bindings;
 
-    LetBinding(ImmutableMap<String, Value> bindings) {
-      this.bindings = bindings;
+    LetBinding(Map<String, Value> bindings) {
+      this.bindings = ImmutableMap.copyOf(bindings);
     }
 
     public Expr in(Value in) {
@@ -257,7 +257,7 @@ public final class Language {
     return new LetBinding(ImmutableMap.of(v1, d1, v2, d2, v3, d3, v4, d4, v5, d5));
   }
 
-  public static LetBinding Let(ImmutableMap<String, Value> bindings) {
+  public static LetBinding Let(Map<String, Value> bindings) {
     return new LetBinding(bindings);
   }
 
