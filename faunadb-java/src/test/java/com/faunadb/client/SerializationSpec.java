@@ -29,33 +29,42 @@ public class SerializationSpec {
 
   @Test
   public void shouldSerializeLiteralValues() throws Exception {
-    toJSON(Value(Long.MAX_VALUE), format("%s", Long.MAX_VALUE));
-    toJSON(Value("a string"), "\"a string\"");
-    toJSON(Value(10), "10");
-    toJSON(Value(1.0), "1.0");
-    toJSON(Value(true), "true");
-    toJSON(Value(false), "false");
-    toJSON(Null(), "null");
+    assertJson(Value(Long.MAX_VALUE), format("%s", Long.MAX_VALUE));
+    assertJson(Value("a string"), "\"a string\"");
+    assertJson(Value(10), "10");
+    assertJson(Value(1.0), "1.0");
+    assertJson(Value(true), "true");
+    assertJson(Value(false), "false");
+    assertJson(Null(), "null");
   }
 
   @Test
   public void shouldSerializeAnArray() throws Exception {
-    toJSON(Arr(Value("a string"), Value(10)), "[\"a string\",10]");
-    toJSON(Arr(ImmutableList.<Value>of(Value("other string"), Value(42))), "[\"other string\",42]");
+    assertJson(
+      Arr(
+        Value("a string"),
+        Value(10)
+      ), "[\"a string\",10]");
+
+    assertJson(
+      Arr(ImmutableList.<Value>of(
+        Value("other string"),
+        Value(42)
+      )), "[\"other string\",42]");
   }
 
   @Test
   public void shouldSerializeAnObject() throws Exception {
-    toJSON(Obj(), "{\"object\":{}}");
+    assertJson(Obj(), "{\"object\":{}}");
 
-    toJSON(
+    assertJson(
       Obj("k1", Value("v1")),
       "{\"object\":{\"k1\":\"v1\"}}");
 
-    toJSON(Obj("k1", Value("v1"), "k2", Value("v2")),
+    assertJson(Obj("k1", Value("v1"), "k2", Value("v2")),
       "{\"object\":{\"k1\":\"v1\",\"k2\":\"v2\"}}");
 
-    toJSON(
+    assertJson(
       Obj(
         "k1", Value("v1"),
         "k2", Value("v2"),
@@ -63,7 +72,7 @@ public class SerializationSpec {
       ),
       "{\"object\":{\"k1\":\"v1\",\"k2\":\"v2\",\"k3\":\"v3\"}}");
 
-    toJSON(
+    assertJson(
       Obj(
         "k1", Value("v1"),
         "k2", Value("v2"),
@@ -72,7 +81,7 @@ public class SerializationSpec {
       ),
       "{\"object\":{\"k1\":\"v1\",\"k2\":\"v2\",\"k3\":\"v3\",\"k4\":\"v4\"}}");
 
-    toJSON(
+    assertJson(
       Obj(
         "k1", Value("v1"),
         "k2", Value("v2"),
@@ -82,7 +91,7 @@ public class SerializationSpec {
       ),
       "{\"object\":{\"k1\":\"v1\",\"k2\":\"v2\",\"k3\":\"v3\",\"k4\":\"v4\",\"k5\":\"v5\"}}");
 
-    toJSON(
+    assertJson(
       Obj(ImmutableMap.<String, Value>of(
         "k1", Value("v1"),
         "k2", Value("v2"))
@@ -92,29 +101,29 @@ public class SerializationSpec {
 
   @Test
   public void shouldSerializeRef() throws Exception {
-    toJSON(Ref("classes"), "{\"@ref\":\"classes\"}");
+    assertJson(Ref("classes"), "{\"@ref\":\"classes\"}");
   }
 
   @Test
   public void shouldSerializeInstantValue() throws Exception {
-    toJSON(Value(Instant.EPOCH), "{\"@ts\":\"1970-01-01T00:00:00Z\"}");
+    assertJson(Value(Instant.EPOCH), "{\"@ts\":\"1970-01-01T00:00:00Z\"}");
   }
 
   @Test
   public void shouldSerializeDateValue() throws Exception {
-    toJSON(Value(LocalDate.of(2015, 1, 15)), "{\"@date\":\"2015-01-15\"}");
+    assertJson(Value(LocalDate.of(2015, 1, 15)), "{\"@date\":\"2015-01-15\"}");
   }
 
   @Test
   public void shouldSerializeLetExpressions() throws Exception {
-    toJSON(
+    assertJson(
       Let(
         "v1", Value("x1")
       ).in(
         Var("x")
       ), "{\"let\":{\"v1\":\"x1\"},\"in\":{\"var\":\"x\"}}");
 
-    toJSON(
+    assertJson(
       Let(
         "v1", Value("x1"),
         "v2", Value("x2")
@@ -122,7 +131,7 @@ public class SerializationSpec {
         Var("x")
       ), "{\"let\":{\"v1\":\"x1\",\"v2\":\"x2\"},\"in\":{\"var\":\"x\"}}");
 
-    toJSON(
+    assertJson(
       Let(
         "v1", Value("x1"),
         "v2", Value("x2"),
@@ -131,7 +140,7 @@ public class SerializationSpec {
         Var("x")
       ), "{\"let\":{\"v1\":\"x1\",\"v2\":\"x2\",\"v3\":\"x3\"},\"in\":{\"var\":\"x\"}}");
 
-    toJSON(
+    assertJson(
       Let(
         "v1", Value("x1"),
         "v2", Value("x2"),
@@ -141,7 +150,7 @@ public class SerializationSpec {
         Var("x")
       ), "{\"let\":{\"v1\":\"x1\",\"v2\":\"x2\",\"v3\":\"x3\",\"v4\":\"x4\"},\"in\":{\"var\":\"x\"}}");
 
-    toJSON(
+    assertJson(
       Let(
         "v1", Value("x1"),
         "v2", Value("x2"),
@@ -152,11 +161,11 @@ public class SerializationSpec {
         Var("x")
       ), "{\"let\":{\"v1\":\"x1\",\"v2\":\"x2\",\"v3\":\"x3\",\"v4\":\"x4\",\"v5\":\"x5\"},\"in\":{\"var\":\"x\"}}");
 
-    toJSON(
+    assertJson(
       Let(ImmutableMap.<String, Value>of(
         "v1", Value("x1"),
         "v2", Value("x2")
-      )
+        )
       ).in(
         Var("x")
       ), "{\"let\":{\"v1\":\"x1\",\"v2\":\"x2\"},\"in\":{\"var\":\"x\"}}");
@@ -164,7 +173,7 @@ public class SerializationSpec {
 
   @Test
   public void shouldSerializeIfExpression() throws Exception {
-    toJSON(
+    assertJson(
       If(Value(true))
         .then(Value(true))
         .elze(Value(false)),
@@ -181,8 +190,9 @@ public class SerializationSpec {
   public void validateNull() throws Exception {
   }
 
-  private void toJSON(Expr expr, String str) throws JsonProcessingException {
-    assertThat(json.writeValueAsString(expr), equalTo(str));
+  private void assertJson(Expr expr, String jsonString) throws JsonProcessingException {
+    assertThat(json.writeValueAsString(expr),
+      equalTo(jsonString));
   }
 
 //  public void serializeComplexValues() throws JsonProcessingException {
