@@ -127,7 +127,7 @@ public final class Language {
   }
 
   /**
-   * Creates a null object
+   * Creates a null value
    *
    * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#values">FaunaDB Values</a></p>
    */

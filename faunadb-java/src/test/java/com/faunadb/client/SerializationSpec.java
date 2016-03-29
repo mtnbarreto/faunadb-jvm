@@ -10,6 +10,9 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import java.time.Instant;
+import java.time.LocalDate;
+
 import static com.faunadb.client.query.Language.*;
 import static java.lang.String.format;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -90,6 +93,21 @@ public class SerializationSpec {
   @Test
   public void shouldSerializeRef() throws Exception {
     toJSON(Ref("classes"), "{\"@ref\":\"classes\"}");
+  }
+
+  @Test
+  public void shouldSerializeInstantValue() throws Exception {
+    toJSON(Value(Instant.EPOCH), "{\"@ts\":\"1970-01-01T00:00:00Z\"}");
+  }
+
+  @Test
+  public void shouldSerializeDateValue() throws Exception {
+    toJSON(Value(LocalDate.of(2015, 1, 15)), "{\"@date\":\"2015-01-15\"}");
+  }
+
+  @Test
+  @Ignore
+  public void testSerializeSetExpr() throws Exception {
   }
 
   @Test
