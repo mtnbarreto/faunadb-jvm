@@ -163,6 +163,15 @@ public class SerializationSpec {
   }
 
   @Test
+  public void shouldSerializeIfExpression() throws Exception {
+    toJSON(
+      If(Value(true))
+        .then(Value(true))
+        .elze(Value(false)),
+      "{\"if\":true,\"then\":true,\"else\":false}");
+  }
+
+  @Test
   @Ignore
   public void testSerializeSetExpr() throws Exception {
   }
