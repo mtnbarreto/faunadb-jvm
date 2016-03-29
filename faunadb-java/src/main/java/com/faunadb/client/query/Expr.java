@@ -1,11 +1,13 @@
 package com.faunadb.client.query;
 
+import com.fasterxml.jackson.annotation.JsonValue;
 import com.faunadb.client.types.Value;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import java.util.Map;
 
 public class Expr extends Value.ConcreteValue {
+
   private final Value tree;
 
   Expr(Value tree) {
@@ -93,6 +95,7 @@ public class Expr extends Value.ConcreteValue {
     return tree.hashCode();
   }
 
+  @JsonValue
   public Value tree() {
     return tree;
   }

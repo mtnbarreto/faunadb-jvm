@@ -1,13 +1,14 @@
 package com.faunadb.client.query;
 
+import com.faunadb.client.types.Ref;
 import com.faunadb.client.types.Value;
 import com.faunadb.client.types.Value.*;
-import com.faunadb.client.types.Ref;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 
 import java.time.Instant;
 import java.time.LocalDate;
+import java.util.Map;
 
 /**
  * Helper methods for the FaunaDB query language. This class is intended to be statically imported into your code:
@@ -22,7 +23,8 @@ import java.time.LocalDate;
  * }</pre>
  */
 public final class Language {
-  Language() { }
+
+  private Language() {}
 
   /**
    * Enumeration for time units. Used by <a href="https://faunadb.com/documentation/queries#time_functions">FaunaDB Time Functions</a>.
@@ -124,6 +126,15 @@ public final class Language {
     return Expr.create(DateV.create(value));
   }
 
+  /**
+   * Creates a null object
+   *
+   * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#values">FaunaDB Values</a></p>
+   */
+  public static Expr Null() {
+    return Expr.create(NullV.Null);
+  }
+
   // Container Values
 
   /**
@@ -131,7 +142,7 @@ public final class Language {
    *
    * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#values">FaunaDB Values</a></p>
    */
-  public static Expr Obj(ImmutableMap<String, Value> values) {
+  public static Expr Obj(Map<String, Value> values) {
     return Expr.create(ObjectV.create(values));
   }
 

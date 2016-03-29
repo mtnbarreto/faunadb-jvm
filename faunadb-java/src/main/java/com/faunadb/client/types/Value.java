@@ -13,6 +13,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Map;
 
 /**
  * Represents any scalar or non-scalar value in the FaunaDB query language. FaunaDB value types consist of
@@ -238,8 +239,8 @@ public interface Value {
      * Constructs an object value wrapping the given dictionary.
      * @see Language#ObjectV(ImmutableMap)
      */
-    public static ObjectV create(ImmutableMap<String, Value> values) {
-      return new ObjectV(values);
+    public static ObjectV create(Map<String, Value> values) {
+      return new ObjectV(ImmutableMap.copyOf(values));
     }
 
     public ObjectV(ImmutableMap<String, Value> values) {
@@ -333,8 +334,8 @@ public interface Value {
   final class BooleanV extends ScalarValue {
     private final Boolean value;
 
-    public final static BooleanV True = BooleanV.create(true);
-    public final static BooleanV False = BooleanV.create(false);
+    public final static BooleanV True = new BooleanV(true);
+    public final static BooleanV False = new BooleanV(false);
 
     public static BooleanV create(boolean value) {
       return value ? True : False;
