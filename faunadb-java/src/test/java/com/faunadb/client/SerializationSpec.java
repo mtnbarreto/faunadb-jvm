@@ -115,21 +115,21 @@ public class SerializationSpec {
   }
 
   @Test
-  public void shouldSerializeLetExpressions() throws Exception {
+  public void shouldSerializeLet() throws Exception {
     assertJson(
       Let(
         "v1", Value("x1")
       ).in(
-        Var("x")
-      ), "{\"let\":{\"v1\":\"x1\"},\"in\":{\"var\":\"x\"}}");
+        Value("x")
+      ), "{\"let\":{\"v1\":\"x1\"},\"in\":\"x\"}");
 
     assertJson(
       Let(
         "v1", Value("x1"),
         "v2", Value("x2")
       ).in(
-        Var("x")
-      ), "{\"let\":{\"v1\":\"x1\",\"v2\":\"x2\"},\"in\":{\"var\":\"x\"}}");
+        Value("x")
+      ), "{\"let\":{\"v1\":\"x1\",\"v2\":\"x2\"},\"in\":\"x\"}");
 
     assertJson(
       Let(
@@ -137,8 +137,8 @@ public class SerializationSpec {
         "v2", Value("x2"),
         "v3", Value("x3")
       ).in(
-        Var("x")
-      ), "{\"let\":{\"v1\":\"x1\",\"v2\":\"x2\",\"v3\":\"x3\"},\"in\":{\"var\":\"x\"}}");
+        Value("x")
+      ), "{\"let\":{\"v1\":\"x1\",\"v2\":\"x2\",\"v3\":\"x3\"},\"in\":\"x\"}");
 
     assertJson(
       Let(
@@ -147,8 +147,8 @@ public class SerializationSpec {
         "v3", Value("x3"),
         "v4", Value("x4")
       ).in(
-        Var("x")
-      ), "{\"let\":{\"v1\":\"x1\",\"v2\":\"x2\",\"v3\":\"x3\",\"v4\":\"x4\"},\"in\":{\"var\":\"x\"}}");
+        Value("x")
+      ), "{\"let\":{\"v1\":\"x1\",\"v2\":\"x2\",\"v3\":\"x3\",\"v4\":\"x4\"},\"in\":\"x\"}");
 
     assertJson(
       Let(
@@ -158,8 +158,8 @@ public class SerializationSpec {
         "v4", Value("x4"),
         "v5", Value("x5")
       ).in(
-        Var("x")
-      ), "{\"let\":{\"v1\":\"x1\",\"v2\":\"x2\",\"v3\":\"x3\",\"v4\":\"x4\",\"v5\":\"x5\"},\"in\":{\"var\":\"x\"}}");
+        Value("x")
+      ), "{\"let\":{\"v1\":\"x1\",\"v2\":\"x2\",\"v3\":\"x3\",\"v4\":\"x4\",\"v5\":\"x5\"},\"in\":\"x\"}");
 
     assertJson(
       Let(ImmutableMap.<String, Value>of(
@@ -167,19 +167,24 @@ public class SerializationSpec {
         "v2", Value("x2")
         )
       ).in(
-        Var("x")
-      ), "{\"let\":{\"v1\":\"x1\",\"v2\":\"x2\"},\"in\":{\"var\":\"x\"}}");
+        Value("x")
+      ), "{\"let\":{\"v1\":\"x1\",\"v2\":\"x2\"},\"in\":\"x\"}");
   }
 
   @Test
-  public void shouldSerializeIfExpression() throws Exception {
+  public void shouldSerializeVar() throws Exception {
+    assertJson(Var("x"), "{\"var\":\"x\"}");
+  }
+
+  @Test
+  public void shouldSerializeIf() throws Exception {
     assertJson(
       If(Value(true), Value(true), Value(false)),
       "{\"if\":true,\"then\":true,\"else\":false}");
   }
 
   @Test
-  public void shouldSerializeDoExpression() throws Exception {
+  public void shouldSerializeDo() throws Exception {
     assertJson(
       Do(
         If(Value(true), Value("x"), Value("y")),
@@ -191,6 +196,18 @@ public class SerializationSpec {
         If(Value(true), Value("xx"), Value("yy")),
         Value(45)
       )), "{\"do\":[{\"if\":true,\"then\":\"xx\",\"else\":\"yy\"},45]}");
+  }
+
+  @Test
+  public void shouldSerializeLambda() throws Exception {
+
+  }
+
+  //TODO: confirm if its needed
+  @Test
+  @Ignore
+  public void serializeQuote() throws Exception {
+
   }
 
   @Test
