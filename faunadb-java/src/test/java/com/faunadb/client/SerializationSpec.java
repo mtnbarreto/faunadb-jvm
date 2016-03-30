@@ -215,6 +215,15 @@ public class SerializationSpec {
       ), "{\"map\":{\"lambda\":\"x\",\"expr\":{\"var\":\"x\"}},\"collection\":[1,2,3]}");
   }
 
+  @Test
+  public void shouldSerializeForeach() throws Exception {
+    assertJson(
+      Foreach(
+        Lambda("x", Var("x")),
+        Arr(Value(1), Value(2), Value(3))
+      ), "{\"foreach\":{\"lambda\":\"x\",\"expr\":{\"var\":\"x\"}},\"collection\":[1,2,3]}");
+  }
+
   //TODO: confirm if its needed
   @Test
   @Ignore

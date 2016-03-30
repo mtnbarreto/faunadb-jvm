@@ -315,6 +315,15 @@ public final class Language {
     return Expr.fn("map", lambda, "collection", collection);
   }
 
+  /**
+   * Creates a new Foreach expression.
+   *
+   * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#collection_functions">FaunaDB Collection Functions</a>
+   */
+  public static Expr Foreach(Expr lambda, Expr collection) {
+    return Expr.fn("foreach", lambda, "collection", collection);
+  }
+
   // /**
   //  * Creates a new Exists expression.
   //  *
@@ -408,15 +417,6 @@ public final class Language {
   //  */
   // public static Value Do(Value... exprs) {
   //   return Do(ImmutableList.copyOf(exprs));
-  // }
-
-  // /**
-  //  * Creates a new Foreach expression.
-  //  *
-  //  * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#collection_functions">FaunaDB Collection Functions</a>
-  //  */
-  // public static Value Foreach(Value lambda, Value collection) {
-  //   return ObjectV("foreach", lambda, "collection", collection);
   // }
 
   // /**
