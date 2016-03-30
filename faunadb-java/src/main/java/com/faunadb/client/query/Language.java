@@ -324,6 +324,16 @@ public final class Language {
     return Expr.fn("foreach", lambda, "collection", collection);
   }
 
+  /**
+   * Creates a new Filter expression.
+   *
+   * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#collection_functions">FaunaDB Collection Functions</a>
+   */
+  public static Expr Filter(Expr lambda, Expr collection) {
+    return Expr.fn("filter", lambda, "collection", collection);
+  }
+
+
   // /**
   //  * Creates a new Exists expression.
   //  *
@@ -417,15 +427,6 @@ public final class Language {
   //  */
   // public static Value Do(Value... exprs) {
   //   return Do(ImmutableList.copyOf(exprs));
-  // }
-
-  // /**
-  //  * Creates a new Filter expression.
-  //  *
-  //  * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#collection_functions">FaunaDB Collection Functions</a>
-  //  */
-  // public static Value Filter(Value lambda, Value collection) {
-  //   return ObjectV("filter", lambda, "collection", collection);
   // }
 
   // /**

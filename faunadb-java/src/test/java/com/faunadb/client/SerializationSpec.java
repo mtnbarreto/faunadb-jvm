@@ -224,6 +224,16 @@ public class SerializationSpec {
       ), "{\"foreach\":{\"lambda\":\"x\",\"expr\":{\"var\":\"x\"}},\"collection\":[1,2,3]}");
   }
 
+  @Test
+  public void shouldSerializeFilter() throws Exception {
+    assertJson(
+      Filter(
+        Lambda("x", Var("x")),
+        Arr(Value(true), Value(false))
+      ), "{\"filter\":{\"lambda\":\"x\",\"expr\":{\"var\":\"x\"}},\"collection\":[true,false]}");
+  }
+
+
   //TODO: confirm if its needed
   @Test
   @Ignore
