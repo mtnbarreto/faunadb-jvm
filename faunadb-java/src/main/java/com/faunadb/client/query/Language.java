@@ -8,6 +8,7 @@ import com.google.common.collect.ImmutableMap;
 
 import java.time.Instant;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -278,6 +279,22 @@ public final class Language {
    */
   public static Expr If(Expr condition, Expr thenExpr, Expr elseExpr) {
     return Expr.fn("if", condition, "then", thenExpr, "else", elseExpr);
+  }
+
+  /**
+   * Creates a new Do expression.
+   *
+   * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#basic_forms">FaunaDB Basic Forms</a>
+   */
+  public static Expr Do(List<Expr> expressions) {
+    return Expr.fn("do", new Expr(ArrayV.create(expressions)));
+  }
+
+  /**
+   * Creates a new Do expression with the given terms.
+   */
+  public static Expr Do(Expr... exprs) {
+    return Do(ImmutableList.copyOf(exprs));
   }
 
   // /**

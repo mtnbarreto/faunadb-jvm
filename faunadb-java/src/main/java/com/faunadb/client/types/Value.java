@@ -14,6 +14,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -307,12 +308,12 @@ public interface Value {
      *
      * @see Language#ArrayV(ImmutableList)
      */
-    public static ArrayV create(ImmutableList<Expr> values) {
+    public static ArrayV create(List<Expr> values) {
       return new ArrayV(values);
     }
 
-    public ArrayV(ImmutableList<Expr> values) {
-      this.values = values;
+    public ArrayV(List<Expr> values) {
+      this.values = ImmutableList.copyOf(values);
     }
 
     @Override

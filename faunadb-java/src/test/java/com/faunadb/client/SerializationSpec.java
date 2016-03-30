@@ -179,6 +179,21 @@ public class SerializationSpec {
   }
 
   @Test
+  public void shouldSerializeDoExpression() throws Exception {
+    assertJson(
+      Do(
+        If(Value(true), Value("x"), Value("y")),
+        Value(42)
+      ), "{\"do\":[{\"if\":true,\"then\":\"x\",\"else\":\"y\"},42]}");
+
+    assertJson(
+      Do(ImmutableList.of(
+        If(Value(true), Value("xx"), Value("yy")),
+        Value(45)
+      )), "{\"do\":[{\"if\":true,\"then\":\"xx\",\"else\":\"yy\"},45]}");
+  }
+
+  @Test
   @Ignore
   public void testSerializeSetExpr() throws Exception {
   }
