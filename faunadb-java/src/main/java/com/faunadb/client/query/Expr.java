@@ -60,17 +60,21 @@ public class Expr extends Value.ConcreteValue {
 
   static ArrayV escapedList(ImmutableList<Value> l) {
     ImmutableList.Builder<Expr> exprs = ImmutableList.builder();
-    for (Value v : l) exprs.add(Expr.create(v));
+    for (Value v : l)
+      exprs.add(Expr.create(v));
+
     return new ArrayV(upcast(exprs.build()));
   }
 
   static ObjectV escapedMap(ImmutableMap<String, Value> m) {
     ImmutableMap.Builder<String, Expr> exprs = ImmutableMap.builder();
-    for (Map.Entry<String, Value> p : m.entrySet()) exprs.put(p.getKey(), create(p.getValue()));
+    for (Map.Entry<String, Value> p : m.entrySet())
+      exprs.put(p.getKey(), create(p.getValue()));
+
     return new ObjectV(upcast(exprs.build()));
   }
 
-  static ImmutableList<Value> upcast(ImmutableList<Expr> m) {
+  static ImmutableList<Expr> upcast(ImmutableList<Expr> m) {
     return cast(m);
   }
 

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.node.NullNode;
+import com.faunadb.client.query.Expr;
 import com.faunadb.client.query.Language;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
@@ -272,11 +273,15 @@ public interface Value {
    * Represents an array value in the FaunaDB query language. Arrays are polymorphic ordered lists of other values.
    */
   final class ArrayV extends ConcreteValue {
-    private final ImmutableList<Value> values;
+    private final ImmutableList<Expr> values;
 
     @Override
     public ImmutableList<Value> asArray() {
-      return values;
+      ImmutableList.Builder<Value> result = ImmutableList.builder();
+      for (Expr expr : values)
+        result.add(expr.tree());
+
+      return result.build();
     }
 
     /**
@@ -285,7 +290,7 @@ public interface Value {
      * @see Language#ArrayV()
      */
     public static ArrayV empty() {
-      return new ArrayV(ImmutableList.<Value>of());
+      return new ArrayV(ImmutableList.<Expr>of());
     }
 
     /**
@@ -293,7 +298,7 @@ public interface Value {
      *
      * @see Language#ArrayV(Value...)
      */
-    public static ArrayV create(Value... values) {
+    public static ArrayV create(Expr... values) {
       return new ArrayV(ImmutableList.copyOf(values));
     }
 
@@ -302,11 +307,11 @@ public interface Value {
      *
      * @see Language#ArrayV(ImmutableList)
      */
-    public static ArrayV create(ImmutableList<Value> values) {
+    public static ArrayV create(ImmutableList<Expr> values) {
       return new ArrayV(values);
     }
 
-    public ArrayV(ImmutableList<Value> values) {
+    public ArrayV(ImmutableList<Expr> values) {
       this.values = values;
     }
 
@@ -317,7 +322,7 @@ public interface Value {
 
     @JsonValue
     public ImmutableList<Value> values() {
-      return values;
+      return asArray();
     }
 
     @Override

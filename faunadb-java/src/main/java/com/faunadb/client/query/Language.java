@@ -205,7 +205,7 @@ public final class Language {
    *
    * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#values">FaunaDB Values</a></p>
    */
-  public static Expr Arr(ImmutableList<Value> values) {
+  public static Expr Arr(ImmutableList<Expr> values) {
     return Expr.create(ArrayV.create(values));
   }
 
@@ -214,7 +214,7 @@ public final class Language {
    *
    * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#values">FaunaDB Values</a></p>
    */
-  public static Expr Arr(Value... values) {
+  public static Expr Arr(Expr... values) {
     return Expr.create(ArrayV.create(ImmutableList.copyOf(values)));
   }
 

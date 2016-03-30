@@ -47,7 +47,7 @@ public class SerializationSpec {
       ), "[\"a string\",10]");
 
     assertJson(
-      Arr(ImmutableList.<Value>of(
+      Arr(ImmutableList.of(
         Value("other string"),
         Value(42)
       )), "[\"other string\",42]");
