@@ -206,6 +206,15 @@ public class SerializationSpec {
       ), "{\"lambda\":\"x\",\"expr\":{\"if\":{\"var\":\"x\"},\"then\":42,\"else\":45}}");
   }
 
+  @Test
+  public void shouldSerializeMap() throws Exception {
+    assertJson(
+      Map(
+        Lambda("x", Var("x")),
+        Arr(Value(1), Value(2), Value(3))
+      ), "{\"map\":{\"lambda\":\"x\",\"expr\":{\"var\":\"x\"}},\"collection\":[1,2,3]}");
+  }
+
   //TODO: confirm if its needed
   @Test
   @Ignore

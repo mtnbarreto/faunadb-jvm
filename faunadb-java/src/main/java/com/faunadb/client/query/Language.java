@@ -306,6 +306,15 @@ public final class Language {
     return Expr.fn("lambda", Value(var), "expr", expr);
   }
 
+  /**
+   * Creates a new Map expression.
+   *
+   * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#collection_functions">FaunaDB Collection Functions</a>
+   */
+  public static Expr Map(Expr lambda, Expr collection) {
+    return Expr.fn("map", lambda, "collection", collection);
+  }
+
   // /**
   //  * Creates a new Exists expression.
   //  *
@@ -496,15 +505,6 @@ public final class Language {
   //  */
   // public static Value Lambda(String argument, Value expr) {
   //   return ObjectV("lambda", StringV(argument), "expr", expr);
-  // }
-
-  // /**
-  //  * Creates a new Map expression.
-  //  *
-  //  * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#collection_functions">FaunaDB Collection Functions</a>
-  //  */
-  // public static Value Map(Value lambda, Value collection) {
-  //   return ObjectV("map", lambda, "collection", collection);
   // }
 
   // /**
