@@ -47,7 +47,7 @@ public class SerializationSpec {
       ), "[\"a string\",10]");
 
     assertJson(
-      Arr(ImmutableList.of(
+      Arr(ImmutableList.<Value>of(
         Value("other string"),
         Value(42)
       )), "[\"other string\",42]");
@@ -192,7 +192,7 @@ public class SerializationSpec {
       ), "{\"do\":[{\"if\":true,\"then\":\"x\",\"else\":\"y\"},42]}");
 
     assertJson(
-      Do(ImmutableList.of(
+      Do(ImmutableList.<Value>of(
         If(Value(true), Value("xx"), Value("yy")),
         Value(45)
       )), "{\"do\":[{\"if\":true,\"then\":\"xx\",\"else\":\"yy\"},45]}");

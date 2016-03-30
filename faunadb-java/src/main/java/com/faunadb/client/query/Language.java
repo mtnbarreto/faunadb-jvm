@@ -206,7 +206,7 @@ public final class Language {
    *
    * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#values">FaunaDB Values</a></p>
    */
-  public static Expr Arr(ImmutableList<Expr> values) {
+  public static Expr Arr(ImmutableList<Value> values) {
     return Expr.create(ArrayV.create(values));
   }
 
@@ -215,7 +215,7 @@ public final class Language {
    *
    * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#values">FaunaDB Values</a></p>
    */
-  public static Expr Arr(Expr... values) {
+  public static Expr Arr(Value... values) {
     return Expr.create(ArrayV.create(ImmutableList.copyOf(values)));
   }
 
@@ -286,14 +286,14 @@ public final class Language {
    *
    * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#basic_forms">FaunaDB Basic Forms</a>
    */
-  public static Expr Do(List<Expr> expressions) {
+  public static Expr Do(List<Value> expressions) {
     return Expr.fn("do", new Expr(ArrayV.create(expressions)));
   }
 
   /**
    * Creates a new Do expression with the given terms.
    */
-  public static Expr Do(Expr... exprs) {
+  public static Expr Do(Value... exprs) {
     return Do(ImmutableList.copyOf(exprs));
   }
 

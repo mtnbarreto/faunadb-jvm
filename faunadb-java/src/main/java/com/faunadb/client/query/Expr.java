@@ -74,7 +74,7 @@ public class Expr extends Value.ConcreteValue {
     return new ObjectV(upcast(exprs.build()));
   }
 
-  static ImmutableList<Expr> upcast(ImmutableList<Expr> m) {
+  static ImmutableList<Value> upcast(ImmutableList<Expr> m) {
     return cast(m);
   }
 

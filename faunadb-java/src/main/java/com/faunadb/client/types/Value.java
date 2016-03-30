@@ -274,15 +274,11 @@ public interface Value {
    * Represents an array value in the FaunaDB query language. Arrays are polymorphic ordered lists of other values.
    */
   final class ArrayV extends ConcreteValue {
-    private final ImmutableList<Expr> values;
+    private final ImmutableList<Value> values;
 
     @Override
     public ImmutableList<Value> asArray() {
-      ImmutableList.Builder<Value> result = ImmutableList.builder();
-      for (Expr expr : values)
-        result.add(expr.tree());
-
-      return result.build();
+      return values;
     }
 
     /**
@@ -291,7 +287,7 @@ public interface Value {
      * @see Language#ArrayV()
      */
     public static ArrayV empty() {
-      return new ArrayV(ImmutableList.<Expr>of());
+      return new ArrayV(ImmutableList.<Value>of());
     }
 
     /**
@@ -299,7 +295,7 @@ public interface Value {
      *
      * @see Language#ArrayV(Value...)
      */
-    public static ArrayV create(Expr... values) {
+    public static ArrayV create(Value... values) {
       return new ArrayV(ImmutableList.copyOf(values));
     }
 
@@ -308,11 +304,11 @@ public interface Value {
      *
      * @see Language#ArrayV(ImmutableList)
      */
-    public static ArrayV create(List<Expr> values) {
+    public static ArrayV create(List<Value> values) {
       return new ArrayV(values);
     }
 
-    public ArrayV(List<Expr> values) {
+    public ArrayV(List<Value> values) {
       this.values = ImmutableList.copyOf(values);
     }
 
