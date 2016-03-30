@@ -297,6 +297,15 @@ public final class Language {
     return Do(ImmutableList.copyOf(exprs));
   }
 
+  /**
+   * Creates a new Lambda expression.
+   *
+   * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#basic_forms">FaunaDB Basic Forms</a>
+   */
+  public static Expr Lambda(String var, Expr expr) {
+    return Expr.fn("lambda", Value(var), "expr", expr);
+  }
+
   // /**
   //  * Creates a new Exists expression.
   //  *

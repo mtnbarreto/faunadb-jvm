@@ -200,7 +200,10 @@ public class SerializationSpec {
 
   @Test
   public void shouldSerializeLambda() throws Exception {
-
+    assertJson(
+      Lambda("x",
+        If(Var("x"), Value(42), Value(45))
+      ), "{\"lambda\":\"x\",\"expr\":{\"if\":{\"var\":\"x\"},\"then\":42,\"else\":45}}");
   }
 
   //TODO: confirm if its needed
