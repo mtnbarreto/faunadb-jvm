@@ -751,12 +751,29 @@ public final class Language {
     return Expr.fn("add", Arr(terms));
   }
 
-   /**
-    * Creates a new Add expression operating on the given terms.
-    */
-   public static Expr Add(Expr... terms) {
-     return Add(ImmutableList.copyOf(terms));
-   }
+  /**
+   * Creates a new Add expression operating on the given terms.
+   */
+  public static Expr Add(Expr... terms) {
+    return Add(ImmutableList.copyOf(terms));
+  }
+
+  /**
+   * Creates a new Multiply expression.
+   * <p>
+   * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#misc_functions">FaunaDB Miscellaneous Functions</a></p>
+   */
+  public static Expr Multiply(ImmutableList<Expr> terms) {
+    return Expr.fn("multiply", Arr(terms));
+  }
+
+  /**
+   * Creates a new Multiply expression operating on the given terms.
+   */
+  public static Expr Multiply(Expr... terms) {
+    return Multiply(ImmutableList.copyOf(terms));
+  }
+
 
   // /**
   //  * Creates a new Subtract expression.
@@ -789,21 +806,6 @@ public final class Language {
   //   return Divide(ImmutableList.copyOf(terms));
   // }
 
-  // /**
-  //  * Creates a new Multiply expression.
-  //  *
-  //  * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#misc_functions">FaunaDB Miscellaneous Functions</a></p>
-  //  */
-  // public static Value Multiply(ImmutableList<Value> terms) {
-  //   return ObjectV("multiply", ArrayV(terms));
-  // }
-
-  // /**
-  //  * Creates a new Multiply expression operating on the given terms.
-  //  */
-  // public static Value Multiply(Value... terms) {
-  //   return Multiply(ImmutableList.copyOf(terms));
-  // }
 
   // /**
   //  * Creates a new Modulo expression.

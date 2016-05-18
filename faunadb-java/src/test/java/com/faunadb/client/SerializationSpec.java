@@ -612,6 +612,12 @@ public class SerializationSpec {
     assertJson(Add(Value(100), Value(10)),"{\"add\":[100,10]}");
     assertJson(Add(ImmutableList.of(Value(100), Value(10))),"{\"add\":[100,10]}");
   }
+  
+  @Test
+  public void shouldSerializeMultiply() throws Exception {
+    assertJson(Multiply(Value(100), Value(10)),"{\"multiply\":[100,10]}");
+    assertJson(Multiply(ImmutableList.of(Value(100), Value(10))),"{\"multiply\":[100,10]}");
+  }
 
   private void assertJson(Expr expr, String jsonString) throws JsonProcessingException {
     assertThat(json.writeValueAsString(expr),
