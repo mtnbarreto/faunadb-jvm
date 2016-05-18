@@ -501,6 +501,14 @@ public class SerializationSpec {
     assertJson(Logout(Value(true)), "{\"logout\":true}");
   }
 
+  @Test
+  public void shouldSerializeIdentify() throws Exception {
+    assertJson(
+      Identify(Ref("classes/characters/104979509695139637"), Value("abracadabra")),
+      "{\"identify\":{\"@ref\":\"classes/characters/104979509695139637\"},\"password\":\"abracadabra\"}"
+    );
+  }
+
   //TODO: confirm if its needed
   @Test
   @Ignore

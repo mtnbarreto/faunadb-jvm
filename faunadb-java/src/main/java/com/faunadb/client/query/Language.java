@@ -630,6 +630,15 @@ public final class Language {
     return Expr.fn("logout", invalidateAll);
   }
 
+  /**
+   * Creates a new Identify expression.
+   * <p>
+   * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#auth_functions">FaunaDB Authentication Functions</a></p>
+   */
+  public static Expr Identify(Expr ref, Expr password) {
+    return Expr.fn("identify", ref, "password", password);
+  }
+
   // /**
   //  * Creates a new Select expression.
   //  *
@@ -815,15 +824,6 @@ public final class Language {
   //   return ObjectV("contains", ArrayV(pathValueBuilder.build()), "in", in);
   // }
 
-
-  // /**
-  //  * Creates a new Identify expression.
-  //  *
-  //  * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#auth_functions">FaunaDB Authentication Functions</a></p>
-  //  */
-  // public static Value Identify(Value ref, Value password) {
-  //   return ObjectV("identify", ref, "password", password);
-  // }
 
   // /**
   //  * Creates a new Time expression.
