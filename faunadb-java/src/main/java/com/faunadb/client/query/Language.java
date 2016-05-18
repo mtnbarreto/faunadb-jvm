@@ -8,8 +8,6 @@ import com.google.common.collect.ImmutableMap;
 
 import java.time.Instant;
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 import static java.lang.String.format;
@@ -155,7 +153,7 @@ public final class Language {
    *
    * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#values">FaunaDB Values</a></p>
    */
-  public static Expr Obj(Map<String, Expr> values) {
+  public static Expr Obj(ImmutableMap<String, Expr> values) {
     ImmutableMap.Builder<String, Value> innerValues = ImmutableMap.builder();
     for (Map.Entry<String, Expr> kv : values.entrySet())
       innerValues.put(kv.getKey(), kv.getValue().tree());
@@ -222,7 +220,7 @@ public final class Language {
    *
    * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#values">FaunaDB Values</a></p>
    */
-  public static Expr Arr(List<Expr> values) {
+  public static Expr Arr(ImmutableList<Expr> values) {
     ImmutableList.Builder<Value> innerValues = ImmutableList.builder();
     for (Expr value : values)
       innerValues.add(value.tree());
@@ -236,7 +234,7 @@ public final class Language {
    * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#values">FaunaDB Values</a></p>
    */
   public static Expr Arr(Expr... values) {
-    return Arr(Arrays.asList(values));
+    return Arr(ImmutableList.copyOf(values));
   }
 
   // Basic Forms
@@ -306,8 +304,8 @@ public final class Language {
    *
    * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#basic_forms">FaunaDB Basic Forms</a>
    */
-  public static Expr Do(List<Expr> expressions) {
-    return Expr.fn("do", new Expr(ArrayV.create(Expr.upcast(ImmutableList.copyOf(expressions)))));
+  public static Expr Do(ImmutableList<Expr> expressions) {
+    return Expr.fn("do", new Expr(ArrayV.create(Expr.upcast(expressions))));
   }
 
   /**
