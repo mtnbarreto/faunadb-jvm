@@ -521,39 +521,56 @@ public final class Language {
     return Expr.fn("remove", ref, "ts", ts, "action", Value(action.getValue()));
   }
 
-   /**
-    * Creates a new Match expression.
-    *
-    * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#sets">FaunaDB Set Functions</a></p>
-    */
-   public static Expr Match(Expr index) {
-     return Expr.fn("match", index);
-   }
+  /**
+   * Creates a new Match expression.
+   * <p>
+   * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#sets">FaunaDB Set Functions</a></p>
+   */
+  public static Expr Match(Expr index) {
+    return Expr.fn("match", index);
+  }
 
   /**
    * Creates a new Match expression.
-   *
+   * <p>
    * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#sets">FaunaDB Set Functions</a></p>
    */
   public static Expr Match(Expr index, Expr term) {
     return Expr.fn("match", index, "terms", term);
   }
 
-   /**
-    * Creates a new Union expression.
-    *
-    * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#sets">FaunaDB Set Functions</a></p>
-    */
-   public static Expr Union(ImmutableList<Expr> sets) {
-     return Expr.fn("union", Arr(sets));
-   }
+  /**
+   * Creates a new Union expression.
+   * <p>
+   * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#sets">FaunaDB Set Functions</a></p>
+   */
+  public static Expr Union(ImmutableList<Expr> sets) {
+    return Expr.fn("union", Arr(sets));
+  }
 
-   /**
-    * Creates a new Union expression operating on the given sets.
-    */
-   public static Expr Union(Expr... sets) {
-     return Union(ImmutableList.copyOf(sets));
-   }
+  /**
+   * Creates a new Union expression operating on the given sets.
+   */
+  public static Expr Union(Expr... sets) {
+    return Union(ImmutableList.copyOf(sets));
+  }
+
+  /**
+   * Creates a new Intersection expression.
+   * <p>
+   * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#sets">FaunaDB Set Functions</a></p>
+   */
+  public static Expr Intersection(ImmutableList<Expr> sets) {
+    return Expr.fn("intersection", Arr(sets));
+  }
+
+  /**
+   * Creates a new Intersection set expression operating on the given sets.
+   */
+  public static Expr Intersection(Expr... sets) {
+    return Intersection(ImmutableList.copyOf(sets));
+  }
+
 
   // /**
   //  * Creates a new Difference set.
@@ -632,21 +649,6 @@ public final class Language {
   //   return ObjectV("get", resource);
   // }
 
-  // /**
-  //  * Creates a new Intersection expression.
-  //  *
-  //  * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#sets">FaunaDB Set Functions</a></p>
-  //  */
-  // public static Value Intersection(ImmutableList<Value> sets) {
-  //   return ObjectV("intersection", ArrayV(sets));
-  // }
-
-  // /**
-  //  * Creates a new Intersection set expression operating on the given sets.
-  //  */
-  // public static Value Intersection(Value... sets) {
-  //   return Intersection(ImmutableList.copyOf(sets));
-  // }
 
   // /**
   //  * Creates a new Join expression.

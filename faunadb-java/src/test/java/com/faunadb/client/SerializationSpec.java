@@ -432,6 +432,19 @@ public class SerializationSpec {
     );
   }
 
+  @Test
+  public void shouldSerializeIntersection() throws Exception {
+    assertJson(
+      Intersection(Ref("databases"), Ref("keys")),
+      "{\"intersection\":[{\"@ref\":\"databases\"},{\"@ref\":\"keys\"}]}"
+    );
+
+    assertJson(
+      Intersection(ImmutableList.of(Ref("databases"), Ref("keys"))),
+      "{\"intersection\":[{\"@ref\":\"databases\"},{\"@ref\":\"keys\"}]}"
+    );
+  }
+
   //TODO: confirm if its needed
   @Test
   @Ignore
