@@ -419,6 +419,19 @@ public class SerializationSpec {
     );
   }
 
+  @Test
+  public void shouldSerializeUnion() throws Exception {
+    assertJson(
+      Union(Ref("databases"), Ref("keys")),
+      "{\"union\":[{\"@ref\":\"databases\"},{\"@ref\":\"keys\"}]}"
+    );
+
+    assertJson(
+      Union(ImmutableList.of(Ref("databases"), Ref("keys"))),
+      "{\"union\":[{\"@ref\":\"databases\"},{\"@ref\":\"keys\"}]}"
+    );
+  }
+
   //TODO: confirm if its needed
   @Test
   @Ignore

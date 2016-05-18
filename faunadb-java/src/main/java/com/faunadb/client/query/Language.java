@@ -539,6 +539,21 @@ public final class Language {
     return Expr.fn("match", index, "terms", term);
   }
 
+   /**
+    * Creates a new Union expression.
+    *
+    * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#sets">FaunaDB Set Functions</a></p>
+    */
+   public static Expr Union(ImmutableList<Expr> sets) {
+     return Expr.fn("union", Arr(sets));
+   }
+
+   /**
+    * Creates a new Union expression operating on the given sets.
+    */
+   public static Expr Union(Expr... sets) {
+     return Union(ImmutableList.copyOf(sets));
+   }
 
   // /**
   //  * Creates a new Difference set.
@@ -674,22 +689,6 @@ public final class Language {
   //   }
 
   //   return ObjectV("select", ArrayV(pathValueBuilder.build()), "from", from);
-  // }
-
-  // /**
-  //  * Creates a new Union expression.
-  //  *
-  //  * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#sets">FaunaDB Set Functions</a></p>
-  //  */
-  // public static Value Union(ImmutableList<Value> sets) {
-  //   return ObjectV("union", ArrayV(sets));
-  // }
-
-  // /**
-  //  * Creates a new Union expression operating on the given sets.
-  //  */
-  // public static Value Union(Value... sets) {
-  //   return Union(ImmutableList.copyOf(sets));
   // }
 
 
