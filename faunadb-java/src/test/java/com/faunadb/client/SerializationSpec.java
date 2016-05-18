@@ -496,6 +496,11 @@ public class SerializationSpec {
     );
   }
 
+  @Test
+  public void shouldSerializeLogout() throws Exception {
+    assertJson(Logout(Value(true)), "{\"logout\":true}");
+  }
+
   //TODO: confirm if its needed
   @Test
   @Ignore
