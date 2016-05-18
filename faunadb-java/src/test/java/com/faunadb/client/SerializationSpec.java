@@ -471,6 +471,19 @@ public class SerializationSpec {
     );
   }
 
+  @Test
+  public void shouldSerializeJoin() throws Exception {
+    assertJson(
+      Join(
+        Match(Ref("indexes/spellbooks_by_owner"), Ref("classes/characters/104979509695139637")),
+        Ref("indexes/spells_by_spellbook")
+      ),
+      "{\"join\":{\"match\":{\"@ref\":\"indexes/spellbooks_by_owner\"}," +
+        "\"terms\":{\"@ref\":\"classes/characters/104979509695139637\"}}," +
+        "\"with\":{\"@ref\":\"indexes/spells_by_spellbook\"}}"
+    );
+  }
+
   //TODO: confirm if its needed
   @Test
   @Ignore

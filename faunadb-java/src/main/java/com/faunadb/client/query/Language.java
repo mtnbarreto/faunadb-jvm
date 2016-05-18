@@ -603,15 +603,14 @@ public final class Language {
     return Distinct(ImmutableList.copyOf(sets));
   }
 
-
-  // /**
-  //  * Creates a new Join expression.
-  //  *
-  //  * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#sets">FaunaDB Set Functions</a></p>
-  //  */
-  // public static Value Join(Value source, Value target) {
-  //   return ObjectV("join", source, "with", target);
-  // }
+  /**
+   * Creates a new Join expression.
+   * <p>
+   * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#sets">FaunaDB Set Functions</a></p>
+   */
+  public static Expr Join(Expr source, Expr target) {
+    return Expr.fn("join", source, "with", target);
+  }
 
 
   // /**
