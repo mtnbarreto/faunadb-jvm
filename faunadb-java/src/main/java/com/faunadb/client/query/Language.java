@@ -774,22 +774,22 @@ public final class Language {
     return Multiply(ImmutableList.copyOf(terms));
   }
 
+  /**
+   * Creates a new Subtract expression.
+   * <p>
+   * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#misc_functions">FaunaDB Miscellaneous Functions</a></p>
+   */
+  public static Expr Subtract(ImmutableList<Expr> terms) {
+    return Expr.fn("subtract", Arr(terms));
+  }
 
-  // /**
-  //  * Creates a new Subtract expression.
-  //  *
-  //  * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#misc_functions">FaunaDB Miscellaneous Functions</a></p>
-  //  */
-  // public static Value Subtract(ImmutableList<Value> terms) {
-  //   return ObjectV("subtract", ArrayV(terms));
-  // }
+  /**
+   * Creates a new Subtract expression operating on the given terms.
+   */
+  public static Expr Subtract(Expr... terms) {
+    return Subtract(ImmutableList.copyOf(terms));
+  }
 
-  // /**
-  //  * Creates a new Subtract expression operating on the given terms.
-  //  */
-  // public static Value Subtract(Value... terms) {
-  //   return Subtract(ImmutableList.copyOf(terms));
-  // }
   // /**
   //  * Creates a new Divide expression.
   //  *

@@ -619,6 +619,12 @@ public class SerializationSpec {
     assertJson(Multiply(ImmutableList.of(Value(100), Value(10))),"{\"multiply\":[100,10]}");
   }
 
+  @Test
+  public void shouldSerializeSubtract() throws Exception {
+    assertJson(Subtract(Value(100), Value(10)),"{\"subtract\":[100,10]}");
+    assertJson(Subtract(ImmutableList.of(Value(100), Value(10))),"{\"subtract\":[100,10]}");
+  }
+
   private void assertJson(Expr expr, String jsonString) throws JsonProcessingException {
     assertThat(json.writeValueAsString(expr),
       equalTo(jsonString));
