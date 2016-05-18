@@ -337,6 +337,16 @@ public class SerializationSpec {
     );
   }
 
+  @Test
+  public void shouldSerializeCreate() throws Exception {
+    assertJson(
+      Create(
+        Ref("databases"),
+        Obj("name", Value("annuvin"))
+      ), "{\"create\":{\"@ref\":\"databases\"},\"params\":{\"object\":{\"name\":\"annuvin\"}}}");
+
+  }
+
   //TODO: confirm if its needed
   @Test
   @Ignore

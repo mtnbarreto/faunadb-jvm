@@ -466,23 +466,15 @@ public final class Language {
     return Expr.fn("count", set, "events", countEvents);
   }
 
-  // /**
-  //  * Creates a new Create expression.
-  //  *
-  //  * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#write_functions">FaunaDB Write Functions</a></p>
-  //  */
-  // public static Value Create(Value ref) {
-  //   return ObjectV("create", ref);
-  // }
 
-  // /**
-  //  * Creates a new Create expression.
-  //  *
-  //  * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#write_functions">FaunaDB Write Functions</a></p>
-  //  */
-  // public static Value Create(Value ref, Value params) {
-  //   return ObjectV("create", ref, "params", params);
-  // }
+  /**
+   * Creates a new Create expression.
+   * <p>
+   * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#write_functions">FaunaDB Write Functions</a></p>
+   */
+  public static Expr Create(Expr ref, Expr params) {
+    return Expr.fn("create", ref, "params", params);
+  }
 
   // /**
   //  * Creates a new Insert expression.
