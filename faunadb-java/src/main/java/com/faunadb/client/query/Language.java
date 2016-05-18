@@ -391,6 +391,14 @@ public final class Language {
     return Expr.fn("append", elements, "collection", collection);
   }
 
+  /**
+   * Creates a new Get expression.
+   * <p>
+   * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#read_functions">FaunaDB Read Functions</a>
+   */
+  public static Expr Get(Expr ref) {
+    return Expr.fn("get", ref);
+  }
 
   // /**
   //  * Creates a new Exists expression.

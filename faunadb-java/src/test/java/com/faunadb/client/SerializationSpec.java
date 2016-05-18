@@ -272,6 +272,14 @@ public class SerializationSpec {
     );
   }
 
+  @Test
+  public void shouldSerializeGet() throws Exception {
+    assertJson(
+      Get(Ref("classes/spells/104979509692858368")),
+      "{\"get\":{\"@ref\":\"classes/spells/104979509692858368\"}}"
+    );
+  }
+
   //TODO: confirm if its needed
   @Test
   @Ignore
