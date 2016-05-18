@@ -823,6 +823,14 @@ public final class Language {
     return Modulo(ImmutableList.copyOf(terms));
   }
 
+  public static Expr LT(ImmutableList<Expr> values) {
+    return Expr.fn("lt", Arr(values));
+  }
+
+  public static Expr LT(Expr... values) {
+    return LT(ImmutableList.copyOf(values));
+  }
+
   // /**
   //  * Creates a new Or expression.
   //  *
