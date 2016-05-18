@@ -378,6 +378,22 @@ public class SerializationSpec {
     );
   }
 
+  //FIXME: review Action usage
+  @Test
+  public void shouldSerializeInsert() throws Exception {
+    assertJson(
+      Insert(
+        Ref("classes/spells/104979509696660483"),
+        Value(Instant.EPOCH),
+        Action.CREATE,
+        Obj("data", Obj("name", Value("test")))
+      ),
+      "{\"insert\":{\"@ref\":\"classes/spells/104979509696660483\"},\"ts\":{\"@ts\":\"1970-01-01T00:00:00Z\"}," +
+        "\"action\":\"create\",\"params\":{\"object\":{\"data\":{\"object\":{\"name\":\"test\"}}}}}"
+    );
+
+  }
+
   //TODO: confirm if its needed
   @Test
   @Ignore

@@ -503,14 +503,14 @@ public final class Language {
     return Expr.fn("delete", ref);
   }
 
-  // /**
-  //  * Creates a new Insert expression.
-  //  *
-  //  * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#write_functions">FaunaDB Write Functions</a></p>
-  //  */
-  // public static Value Insert(Value ref, long ts, Action action, Value params) {
-  //   return ObjectV("insert", ref, "ts", LongV(ts), "action", StringV(action.getValue()), "params", params);
-  // }
+  /**
+   * Creates a new Insert expression.
+   * <p>
+   * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#write_functions">FaunaDB Write Functions</a></p>
+   */
+  public static Expr Insert(Expr ref, Expr ts, Action action, Expr params) {
+    return Expr.fn("insert", ref, "ts", ts, "action", Value(action.getValue()), "params", params);
+  }
 
   // /**
   //  * Creates a new Remove expression.
