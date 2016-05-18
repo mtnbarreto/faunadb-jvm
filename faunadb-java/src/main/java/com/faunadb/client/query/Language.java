@@ -855,6 +855,14 @@ public final class Language {
     return GTE(ImmutableList.copyOf(values));
   }
 
+  public static Expr And(ImmutableList<Expr> values) {
+    return Expr.fn("and", Arr(values));
+  }
+
+  public static Expr And(Expr... values) {
+    return And(ImmutableList.copyOf(values));
+  }
+
   // /**
   //  * Creates a new Or expression.
   //  *

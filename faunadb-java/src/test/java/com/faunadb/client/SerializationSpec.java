@@ -661,6 +661,12 @@ public class SerializationSpec {
     assertJson(GTE(ImmutableList.of(Value(3), Value(2), Value(2))),"{\"gte\":[3,2,2]}");
   }
 
+  @Test
+  public void shouldSerializeAnd() throws Exception {
+    assertJson(And(Value(true), Value(true), Value(false)),"{\"and\":[true,true,false]}");
+    assertJson(And(ImmutableList.of(Value(true), Value(true), Value(false))),"{\"and\":[true,true,false]}");
+  }
+
   private void assertJson(Expr expr, String jsonString) throws JsonProcessingException {
     assertThat(json.writeValueAsString(expr),
       equalTo(jsonString));
