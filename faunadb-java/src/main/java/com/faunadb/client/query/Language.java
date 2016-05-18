@@ -693,6 +693,10 @@ public final class Language {
     return Expr.fn("date", str);
   }
 
+  public static Expr NextId() {
+    return Expr.fn("next_id", Null());
+  }
+
   // /**
   //  * Creates a new Select expression.
   //  *

@@ -560,6 +560,11 @@ public class SerializationSpec {
     assertJson(Date(Value("1970-01-01")), "{\"date\":\"1970-01-01\"}");
   }
 
+  @Test
+  public void shouldSerializeNextId() throws Exception {
+    assertJson(NextId(), "{\"next_id\":null}");
+  }
+
   //TODO: confirm if its needed
   @Test
   @Ignore
