@@ -484,6 +484,18 @@ public class SerializationSpec {
     );
   }
 
+  @Test
+  public void shouldSerializeLogin() throws Exception {
+    assertJson(
+      Login(
+        Ref("classes/characters/104979509695139637"),
+        Obj("password", Value("abracadabra"))
+      ),
+      "{\"login\":{\"@ref\":\"classes/characters/104979509695139637\"}," +
+        "\"params\":{\"object\":{\"password\":\"abracadabra\"}}}"
+    );
+  }
+
   //TODO: confirm if its needed
   @Test
   @Ignore
