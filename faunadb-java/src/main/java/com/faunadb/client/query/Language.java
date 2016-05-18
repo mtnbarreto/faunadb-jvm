@@ -639,6 +639,26 @@ public final class Language {
     return Expr.fn("identify", ref, "password", password);
   }
 
+  /**
+   * Creates a new Concat expression.
+   * <p>
+   * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#misc_functions">FaunaDB Miscellaneous Functions</a></p>
+   */
+  public static Expr Concat(ImmutableList<Expr> terms) {
+    return Expr.fn("concat", Arr(terms));
+  }
+
+  public static Expr Concat(ImmutableList<Expr> terms, Expr separator) {
+    return Expr.fn("concat", Arr(terms), "separator", separator);
+  }
+
+  /**
+   * Creates a new Concat expression operating on the given terms.
+   */
+  public static Expr Concat(Expr... terms) {
+    return Concat(ImmutableList.copyOf(terms));
+  }
+
   // /**
   //  * Creates a new Select expression.
   //  *
@@ -788,26 +808,6 @@ public final class Language {
   //  */
   // public static Value Equals(Value... terms) {
   //   return Equals(ImmutableList.copyOf(terms));
-  // }
-
-  // /**
-  //  * Creates a new Concat expression.
-  //  *
-  //  * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#misc_functions">FaunaDB Miscellaneous Functions</a></p>
-  //  */
-  // public static Value Concat(ImmutableList<Value> terms) {
-  //   return ObjectV("concat", ArrayV(terms));
-  // }
-
-  // public static Value Concat(ImmutableList<Value> terms, String separator) {
-  //   return ObjectV("concat", ArrayV(terms), "separator", StringV(separator));
-  // }
-
-  // /**
-  //  * Creates a new Concat expression operating on the given terms.
-  //  */
-  // public static Value Concat(Value... terms) {
-  //   return Concat(ImmutableList.copyOf(terms));
   // }
 
   // /**

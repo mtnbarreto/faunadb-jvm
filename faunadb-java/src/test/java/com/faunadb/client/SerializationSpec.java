@@ -509,6 +509,33 @@ public class SerializationSpec {
     );
   }
 
+  @Test
+  public void shouldSerializeConcat() throws Exception {
+    assertJson(
+      Concat(Value("Hen"), Value("Wen")),
+      "{\"concat\":[\"Hen\",\"Wen\"]}"
+    );
+
+    assertJson(
+      Concat(
+        ImmutableList.of(
+          Value("Hen"),
+          Value("Wen")
+        )
+      ), "{\"concat\":[\"Hen\",\"Wen\"]}"
+    );
+
+    assertJson(
+      Concat(
+        ImmutableList.of(
+          Value("Hen"),
+          Value("Wen")
+        ),
+        Value(" ")
+      ), "{\"concat\":[\"Hen\",\"Wen\"],\"separator\":\" \"}"
+    );
+  }
+
   //TODO: confirm if its needed
   @Test
   @Ignore
