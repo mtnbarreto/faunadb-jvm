@@ -684,6 +684,15 @@ public final class Language {
     return Expr.fn("epoch", num, "unit", Value(unit.getValue()));
   }
 
+  /**
+   * Creates a new Date expression.
+   * <p>
+   * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#time_functions">FaunaDB Time and Date Functions</a></p>
+   */
+  public static Expr Date(Expr str) {
+    return Expr.fn("date", str);
+  }
+
   // /**
   //  * Creates a new Select expression.
   //  *
@@ -849,15 +858,6 @@ public final class Language {
   //   return ObjectV("contains", ArrayV(pathValueBuilder.build()), "in", in);
   // }
 
-
-  // /**
-  //  * Creates a new Date expression.
-  //  *
-  //  * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#time_functions">FaunaDB Time and Date Functions</a></p>
-  //  */
-  // public static Value Date(Value date) {
-  //   return ObjectV("date", date);
-  // }
 
   // /**
   //  * Helper for constructing a Path list with the given path terms.

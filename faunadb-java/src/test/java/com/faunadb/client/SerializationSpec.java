@@ -555,6 +555,11 @@ public class SerializationSpec {
     assertJson(Epoch(Value(0), TimeUnit.SECOND), "{\"epoch\":0,\"unit\":\"second\"}");
   }
 
+  @Test
+  public void shouldSerializeDate() throws Exception {
+    assertJson(Date(Value("1970-01-01")), "{\"date\":\"1970-01-01\"}");
+  }
+
   //TODO: confirm if its needed
   @Test
   @Ignore
