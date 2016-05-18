@@ -458,6 +458,19 @@ public class SerializationSpec {
     );
   }
 
+  @Test
+  public void shouldSerializeDistinct() throws Exception {
+    assertJson(
+      Distinct(Ref("databases"), Ref("keys")),
+      "{\"distinct\":[{\"@ref\":\"databases\"},{\"@ref\":\"keys\"}]}"
+    );
+
+    assertJson(
+      Distinct(ImmutableList.of(Ref("databases"), Ref("keys"))),
+      "{\"distinct\":[{\"@ref\":\"databases\"},{\"@ref\":\"keys\"}]}"
+    );
+  }
+
   //TODO: confirm if its needed
   @Test
   @Ignore

@@ -571,7 +571,6 @@ public final class Language {
     return Intersection(ImmutableList.copyOf(sets));
   }
 
-
   /**
    * Creates a new Difference set.
    * <p>
@@ -588,66 +587,21 @@ public final class Language {
     return Difference(ImmutableList.copyOf(sets));
   }
 
-  // /**
-  //  * Creates a new Do expression.
-  //  *
-  //  * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#basic_forms">FaunaDB Basic Forms</a>
-  //  */
-  // public static Value Do(ImmutableList<Value> expressions) {
-  //   return ObjectV("do", ArrayV(expressions));
-  // }
+  /**
+   * Creates a new Distinct set.
+   * <p>
+   * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#sets">FaunaDB Set Functions</a></p>
+   */
+  public static Expr Distinct(ImmutableList<Expr> sets) {
+    return Expr.fn("distinct", Arr(sets));
+  }
 
-  // /**
-  //  * Creates a new Do expression with the given terms.
-  //  */
-  // public static Value Do(Value... exprs) {
-  //   return Do(ImmutableList.copyOf(exprs));
-  // }
-
-  // /**
-  //  * Creates a new Take expression.
-  //  *
-  //  * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#collection_functions">FaunaDB Collection Functions</a>
-  //  */
-  // public static Value Take(Value num, Value collection) {
-  //   return ObjectV("take", num, "collection", collection);
-  // }
-
-  // /**
-  //  * Creates a new Drop expression.
-  //  *
-  //  * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#collection_functions">FaunaDB Collection Functions</a>
-  //  */
-  // public static Value Drop(Value num, Value collection) {
-  //   return ObjectV("drop", num, "collection", collection);
-  // }
-
-  // /**
-  //  * Creates a new Prepend expression.
-  //  *
-  //  * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#collection_functions">FaunaDB Collection Functions</a>
-  //  */
-  // public static Value Prepend(Value elems, Value collection) {
-  //   return ObjectV("prepend", elems, "collection", collection);
-  // }
-
-  // /**
-  //  * Creates a new Append expression.
-  //  *
-  //  * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#collection_functions">FaunaDB Collection Functions</a>
-  //  */
-  // public static Value Append(Value elems, Value collection) {
-  //   return ObjectV("append", elems, "collection", collection);
-  // }
-
-  // /**
-  //  * Creates a new Get expression.
-  //  *
-  //  * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#read_functions">FaunaDB Read Functions</a></p>
-  //  */
-  // public static ObjectV Get(Value resource) {
-  //   return ObjectV("get", resource);
-  // }
+  /**
+   * Creates a new Distinct set expression operating on the given sets.
+   */
+  public static Expr Distinct(Expr... sets) {
+    return Distinct(ImmutableList.copyOf(sets));
+  }
 
 
   // /**
@@ -657,25 +611,6 @@ public final class Language {
   //  */
   // public static Value Join(Value source, Value target) {
   //   return ObjectV("join", source, "with", target);
-  // }
-
-  // /**
-  //  * Creates a new Lambda expression.
-  //  *
-  //  * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#basic_forms">FaunaDB Basic Forms</a>
-  //  */
-  // public static Value Lambda(String argument, Value expr) {
-  //   return ObjectV("lambda", StringV(argument), "expr", expr);
-  // }
-
-
-  // /**
-  //  * Creates a new Quote expression.
-  //  *
-  //  * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#basic_forms">FaunaDB Basic Forms</a>
-  //  */
-  // public static Value Quote(Value expression) {
-  //   return ObjectV("quote", expression);
   // }
 
 
@@ -693,15 +628,6 @@ public final class Language {
   //   return ObjectV("select", ArrayV(pathValueBuilder.build()), "from", from);
   // }
 
-
-  // /**
-  //  * Creates a new Var expression.
-  //  *
-  //  * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#basic_forms">FaunaDB Basic Forms</a>
-  //  */
-  // public static Value Var(String variable) {
-  //   return ObjectV("var", StringV(variable));
-  // }
 
   // /**
   //  * Creates a new Add expression.
