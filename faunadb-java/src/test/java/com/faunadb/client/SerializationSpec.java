@@ -609,68 +609,73 @@ public class SerializationSpec {
 
   @Test
   public void shouldSerializeAdd() throws Exception {
-    assertJson(Add(Value(100), Value(10)),"{\"add\":[100,10]}");
-    assertJson(Add(ImmutableList.of(Value(100), Value(10))),"{\"add\":[100,10]}");
+    assertJson(Add(Value(100), Value(10)), "{\"add\":[100,10]}");
+    assertJson(Add(ImmutableList.of(Value(100), Value(10))), "{\"add\":[100,10]}");
   }
-  
+
   @Test
   public void shouldSerializeMultiply() throws Exception {
-    assertJson(Multiply(Value(100), Value(10)),"{\"multiply\":[100,10]}");
-    assertJson(Multiply(ImmutableList.of(Value(100), Value(10))),"{\"multiply\":[100,10]}");
+    assertJson(Multiply(Value(100), Value(10)), "{\"multiply\":[100,10]}");
+    assertJson(Multiply(ImmutableList.of(Value(100), Value(10))), "{\"multiply\":[100,10]}");
   }
 
   @Test
   public void shouldSerializeSubtract() throws Exception {
-    assertJson(Subtract(Value(100), Value(10)),"{\"subtract\":[100,10]}");
-    assertJson(Subtract(ImmutableList.of(Value(100), Value(10))),"{\"subtract\":[100,10]}");
+    assertJson(Subtract(Value(100), Value(10)), "{\"subtract\":[100,10]}");
+    assertJson(Subtract(ImmutableList.of(Value(100), Value(10))), "{\"subtract\":[100,10]}");
   }
 
   @Test
   public void shouldSerializeDivide() throws Exception {
-    assertJson(Divide(Value(100), Value(10)),"{\"divide\":[100,10]}");
-    assertJson(Divide(ImmutableList.of(Value(100), Value(10))),"{\"divide\":[100,10]}");
+    assertJson(Divide(Value(100), Value(10)), "{\"divide\":[100,10]}");
+    assertJson(Divide(ImmutableList.of(Value(100), Value(10))), "{\"divide\":[100,10]}");
   }
 
   @Test
   public void shouldSerializeModulo() throws Exception {
-    assertJson(Modulo(Value(100), Value(10)),"{\"modulo\":[100,10]}");
-    assertJson(Modulo(ImmutableList.of(Value(100), Value(10))),"{\"modulo\":[100,10]}");
+    assertJson(Modulo(Value(100), Value(10)), "{\"modulo\":[100,10]}");
+    assertJson(Modulo(ImmutableList.of(Value(100), Value(10))), "{\"modulo\":[100,10]}");
   }
 
   @Test
   public void shouldSerializeLT() throws Exception {
-    assertJson(LT(Value(1), Value(2), Value(3)),"{\"lt\":[1,2,3]}");
-    assertJson(LT(ImmutableList.of(Value(1), Value(2), Value(3))),"{\"lt\":[1,2,3]}");
+    assertJson(LT(Value(1), Value(2), Value(3)), "{\"lt\":[1,2,3]}");
+    assertJson(LT(ImmutableList.of(Value(1), Value(2), Value(3))), "{\"lt\":[1,2,3]}");
   }
 
   @Test
   public void shouldSerializeLTE() throws Exception {
-    assertJson(LTE(Value(1), Value(2), Value(2)),"{\"lte\":[1,2,2]}");
-    assertJson(LTE(ImmutableList.of(Value(1), Value(2), Value(2))),"{\"lte\":[1,2,2]}");
+    assertJson(LTE(Value(1), Value(2), Value(2)), "{\"lte\":[1,2,2]}");
+    assertJson(LTE(ImmutableList.of(Value(1), Value(2), Value(2))), "{\"lte\":[1,2,2]}");
   }
 
   @Test
   public void shouldSerializeGT() throws Exception {
-    assertJson(GT(Value(3), Value(2), Value(1)),"{\"gt\":[3,2,1]}");
-    assertJson(GT(ImmutableList.of(Value(3), Value(2), Value(1))),"{\"gt\":[3,2,1]}");
+    assertJson(GT(Value(3), Value(2), Value(1)), "{\"gt\":[3,2,1]}");
+    assertJson(GT(ImmutableList.of(Value(3), Value(2), Value(1))), "{\"gt\":[3,2,1]}");
   }
 
   @Test
   public void shouldSerializeGTE() throws Exception {
-    assertJson(GTE(Value(3), Value(2), Value(2)),"{\"gte\":[3,2,2]}");
-    assertJson(GTE(ImmutableList.of(Value(3), Value(2), Value(2))),"{\"gte\":[3,2,2]}");
+    assertJson(GTE(Value(3), Value(2), Value(2)), "{\"gte\":[3,2,2]}");
+    assertJson(GTE(ImmutableList.of(Value(3), Value(2), Value(2))), "{\"gte\":[3,2,2]}");
   }
 
   @Test
   public void shouldSerializeAnd() throws Exception {
-    assertJson(And(Value(true), Value(true), Value(false)),"{\"and\":[true,true,false]}");
-    assertJson(And(ImmutableList.of(Value(true), Value(true), Value(false))),"{\"and\":[true,true,false]}");
+    assertJson(And(Value(true), Value(true), Value(false)), "{\"and\":[true,true,false]}");
+    assertJson(And(ImmutableList.of(Value(true), Value(true), Value(false))), "{\"and\":[true,true,false]}");
   }
 
   @Test
   public void shouldSerializeOr() throws Exception {
-    assertJson(Or(Value(true), Value(true), Value(false)),"{\"or\":[true,true,false]}");
-    assertJson(Or(ImmutableList.of(Value(true), Value(true), Value(false))),"{\"or\":[true,true,false]}");
+    assertJson(Or(Value(true), Value(true), Value(false)), "{\"or\":[true,true,false]}");
+    assertJson(Or(ImmutableList.of(Value(true), Value(true), Value(false))), "{\"or\":[true,true,false]}");
+  }
+
+  @Test
+  public void shouldSerializeNot() throws Exception {
+    assertJson(Not(Value(true)), "{\"not\":true}");
   }
 
   private void assertJson(Expr expr, String jsonString) throws JsonProcessingException {

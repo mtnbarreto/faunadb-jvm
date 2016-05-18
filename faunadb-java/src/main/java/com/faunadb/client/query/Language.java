@@ -871,4 +871,8 @@ public final class Language {
     return Or(ImmutableList.copyOf(values));
   }
 
+  public static Expr Not(Expr bool) {
+    return Expr.fn("not", bool);
+  }
+
 }
