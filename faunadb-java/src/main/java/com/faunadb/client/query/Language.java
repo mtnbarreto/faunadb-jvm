@@ -382,6 +382,15 @@ public final class Language {
     return Expr.fn("prepend", elements, "collection", collection);
   }
 
+  /**
+   * Creates a new Append expression.
+   * <p>
+   * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#collection_functions">FaunaDB Collection Functions</a>
+   */
+  public static Expr Append(Expr elements, Expr collection) {
+    return Expr.fn("append", elements, "collection", collection);
+  }
+
 
   // /**
   //  * Creates a new Exists expression.
