@@ -625,6 +625,12 @@ public class SerializationSpec {
     assertJson(Subtract(ImmutableList.of(Value(100), Value(10))),"{\"subtract\":[100,10]}");
   }
 
+  @Test
+  public void shouldSerializeDivide() throws Exception {
+    assertJson(Divide(Value(100), Value(10)),"{\"divide\":[100,10]}");
+    assertJson(Divide(ImmutableList.of(Value(100), Value(10))),"{\"divide\":[100,10]}");
+  }
+
   private void assertJson(Expr expr, String jsonString) throws JsonProcessingException {
     assertThat(json.writeValueAsString(expr),
       equalTo(jsonString));

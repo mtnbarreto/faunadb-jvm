@@ -790,21 +790,21 @@ public final class Language {
     return Subtract(ImmutableList.copyOf(terms));
   }
 
-  // /**
-  //  * Creates a new Divide expression.
-  //  *
-  //  * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#misc_functions">FaunaDB Miscellaneous Functions</a></p>
-  //  */
-  // public static Value Divide(ImmutableList<Value> terms) {
-  //   return ObjectV("divide", ArrayV(terms));
-  // }
+  /**
+   * Creates a new Divide expression.
+   * <p>
+   * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#misc_functions">FaunaDB Miscellaneous Functions</a></p>
+   */
+  public static Expr Divide(ImmutableList<Expr> terms) {
+    return Expr.fn("divide", Arr(terms));
+  }
 
-  // /**
-  //  * Creates a new Divide expression operating on the given terms.
-  //  */
-  // public static Value Divide(Value... terms) {
-  //   return Divide(ImmutableList.copyOf(terms));
-  // }
+  /**
+   * Creates a new Divide expression operating on the given terms.
+   */
+  public static Expr Divide(Expr... terms) {
+    return Divide(ImmutableList.copyOf(terms));
+  }
 
 
   // /**
