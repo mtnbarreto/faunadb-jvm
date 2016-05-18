@@ -3,6 +3,7 @@ package com.faunadb.client;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.faunadb.client.query.Expr;
+import com.google.common.base.CaseFormat;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import org.junit.Before;
@@ -534,6 +535,11 @@ public class SerializationSpec {
         Value(" ")
       ), "{\"concat\":[\"Hen\",\"Wen\"],\"separator\":\" \"}"
     );
+  }
+
+  @Test
+  public void shouldSerializeCasefold() throws Exception {
+    assertJson(Casefold(Value("Hen Wen")), "{\"casefold\":\"Hen Wen\"}");
   }
 
   //TODO: confirm if its needed

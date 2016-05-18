@@ -659,6 +659,13 @@ public final class Language {
     return Concat(ImmutableList.copyOf(terms));
   }
 
+  /**
+   * Creates a new Casefolde expression operating on the given terms.
+   */
+  public static Expr Casefold(Expr str) {
+    return Expr.fn("casefold", str);
+  }
+
   // /**
   //  * Creates a new Select expression.
   //  *
