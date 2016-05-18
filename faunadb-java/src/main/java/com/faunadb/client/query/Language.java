@@ -666,6 +666,15 @@ public final class Language {
     return Expr.fn("casefold", str);
   }
 
+  /**
+   * Creates a new Time expression.
+   * <p>
+   * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#time_functions">FaunaDB Time and Date Functions</a></p>
+   */
+  public static Expr Time(Expr str) {
+    return Expr.fn("time", str);
+  }
+
   // /**
   //  * Creates a new Select expression.
   //  *
@@ -831,15 +840,6 @@ public final class Language {
   //   return ObjectV("contains", ArrayV(pathValueBuilder.build()), "in", in);
   // }
 
-
-  // /**
-  //  * Creates a new Time expression.
-  //  *
-  //  * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#time_functions">FaunaDB Time and Date Functions</a></p>
-  //  */
-  // public static Value Time(Value time) {
-  //   return ObjectV("time", time);
-  // }
 
   // /**
   //  * Creates a new Epoch expression.
