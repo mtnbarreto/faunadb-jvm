@@ -512,14 +512,14 @@ public final class Language {
     return Expr.fn("insert", ref, "ts", ts, "action", Value(action.getValue()), "params", params);
   }
 
-  // /**
-  //  * Creates a new Remove expression.
-  //  *
-  //  * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#write_functions">FaunaDB Write Functions</a></p>
-  //  */
-  // public static Value Remove(Value ref, long ts, Action action) {
-  //   return ObjectV("remove", ref, "ts", LongV(ts), "action", StringV(action.getValue()));
-  // }
+  /**
+   * Creates a new Remove expression.
+   * <p>
+   * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#write_functions">FaunaDB Write Functions</a></p>
+   */
+  public static Expr Remove(Expr ref, Expr ts, Action action) {
+    return Expr.fn("remove", ref, "ts", ts, "action", Value(action.getValue()));
+  }
 
 
   // /**

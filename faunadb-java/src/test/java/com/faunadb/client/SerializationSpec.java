@@ -391,7 +391,19 @@ public class SerializationSpec {
       "{\"insert\":{\"@ref\":\"classes/spells/104979509696660483\"},\"ts\":{\"@ts\":\"1970-01-01T00:00:00Z\"}," +
         "\"action\":\"create\",\"params\":{\"object\":{\"data\":{\"object\":{\"name\":\"test\"}}}}}"
     );
+  }
 
+  @Test
+  public void shouldSerializeRemove() throws Exception {
+    assertJson(
+      Remove(
+        Ref("classes/spells/104979509696660483"),
+        Value(Instant.EPOCH),
+        Action.DELETE
+      ),
+      "{\"remove\":{\"@ref\":\"classes/spells/104979509696660483\"}," +
+        "\"ts\":{\"@ts\":\"1970-01-01T00:00:00Z\"},\"action\":\"delete\"}"
+    );
   }
 
   //TODO: confirm if its needed
