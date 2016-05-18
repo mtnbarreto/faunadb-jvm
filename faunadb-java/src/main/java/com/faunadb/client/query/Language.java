@@ -728,19 +728,19 @@ public final class Language {
     return ImmutableList.copyOf(terms);
   }
 
-  // /**
-  //  * Creates a new Select expression.
-  //  *
-  //  * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#misc_functions">FaunaDB Miscellaneous Functions</a></p>
-  //  */
-  // public static Value Select(ImmutableList<Path> path, Value from) {
-  //   ImmutableList.Builder<Value> pathValueBuilder = ImmutableList.builder();
-  //   for (Path term : path) {
-  //     pathValueBuilder.add(term.value());
-  //   }
+  /**
+   * Creates a new Select expression.
+   * <p>
+   * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#misc_functions">FaunaDB Miscellaneous Functions</a></p>
+   */
+  public static Expr Select(ImmutableList<Path> path, Expr from) {
+    ImmutableList.Builder<Expr> pathValueBuilder = ImmutableList.builder();
+    for (Path term : path) {
+      pathValueBuilder.add(Expr.create(term.value()));
+    }
 
-  //   return ObjectV("select", ArrayV(pathValueBuilder.build()), "from", from);
-  // }
+    return Expr.fn("select", Arr(pathValueBuilder.build()), "from", from);
+  }
 
 
   // /**

@@ -590,6 +590,24 @@ public class SerializationSpec {
         "{\"object\":{\"favorites\":{\"object\":{\"foods\":[\"crunchings\",\"munchings\",\"lunchings\"]}}}}}");
   }
 
+  @Test
+  public void shouldSerializeSelect() throws Exception {
+    assertJson(
+      Select(
+        Path(Path.Object("favorites"), Path.Object("foods"), Path.Array(1)),
+        Obj("favorites",
+          Obj("foods", Arr(
+            Value("crunchings"),
+            Value("munchings"),
+            Value("lunchings")
+          ))
+        )
+      ),
+      "{\"select\":[\"favorites\",\"foods\",1],\"from\":" +
+        "{\"object\":{\"favorites\":{\"object\":{\"foods\":[\"crunchings\",\"munchings\",\"lunchings\"]}}}}}"
+    );
+  }
+
   //TODO: confirm if its needed
   @Test
   @Ignore
