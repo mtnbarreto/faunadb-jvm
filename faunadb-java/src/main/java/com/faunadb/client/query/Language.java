@@ -448,14 +448,23 @@ public final class Language {
     return Expr.fn("exists", ref, "ts", timestamp);
   }
 
-  // /**
-  //  * Creates a new Count expression.
-  //  *
-  //  * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#read_functions">FaunaDB Read Functions</a></p>
-  //  */
-  // public static Value Count(Value set) {
-  //   return ObjectV("count", set);
-  // }
+  /**
+   * Creates a new Count expression.
+   * <p>
+   * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#read_functions">FaunaDB Read Functions</a></p>
+   */
+  public static Expr Count(Expr set) {
+    return Expr.fn("count", set);
+  }
+
+  /**
+   * Creates a new Count expression.
+   * <p>
+   * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#read_functions">FaunaDB Read Functions</a></p>
+   */
+  public static Expr Count(Expr set, Expr countEvents) {
+    return Expr.fn("count", set, "events", countEvents);
+  }
 
   // /**
   //  * Creates a new Create expression.
