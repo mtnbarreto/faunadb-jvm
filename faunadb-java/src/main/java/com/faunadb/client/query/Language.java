@@ -485,14 +485,23 @@ public final class Language {
     return Expr.fn("update", ref, "params", params);
   }
 
-   /**
-    * Creates a new Replace expression.
-    *
-    * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#write_functions">FaunaDB Write Functions</a></p>
-    */
-   public static Expr Replace(Expr ref, Expr params) {
-     return Expr.fn("replace", ref, "params", params);
-   }
+  /**
+   * Creates a new Replace expression.
+   * <p>
+   * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#write_functions">FaunaDB Write Functions</a></p>
+   */
+  public static Expr Replace(Expr ref, Expr params) {
+    return Expr.fn("replace", ref, "params", params);
+  }
+
+  /**
+   * Creates a new Delete expression.
+   * <p>
+   * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#write_functions">FaunaDB Write Functions</a></p>
+   */
+  public static Expr Delete(Expr ref) {
+    return Expr.fn("delete", ref);
+  }
 
   // /**
   //  * Creates a new Insert expression.
@@ -512,14 +521,6 @@ public final class Language {
   //   return ObjectV("remove", ref, "ts", LongV(ts), "action", StringV(action.getValue()));
   // }
 
-  // /**
-  //  * Creates a new Delete expression.
-  //  *
-  //  * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#write_functions">FaunaDB Write Functions</a></p>
-  //  */
-  // public static Value Delete(Value ref) {
-  //   return ObjectV("delete", ref);
-  // }
 
   // /**
   //  * Creates a new Difference set.

@@ -370,6 +370,14 @@ public class SerializationSpec {
 
   }
 
+  @Test
+  public void shouldSerializeDelete() throws Exception {
+    assertJson(
+      Delete(Ref("classes/spells/104979509696660483")),
+      "{\"delete\":{\"@ref\":\"classes/spells/104979509696660483\"}}"
+    );
+  }
+
   //TODO: confirm if its needed
   @Test
   @Ignore
