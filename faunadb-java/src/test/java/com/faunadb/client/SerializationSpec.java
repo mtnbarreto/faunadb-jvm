@@ -406,6 +406,19 @@ public class SerializationSpec {
     );
   }
 
+  @Test
+  public void shouldSerializeMatchFunction() throws Exception {
+    assertJson(
+      Match(Ref("indexes/all_users")),
+      "{\"match\":{\"@ref\":\"indexes/all_users\"}}"
+    );
+
+    assertJson(
+      Match(Ref("indexes/spells_by_element"), Value("fire")),
+      "{\"match\":{\"@ref\":\"indexes/spells_by_element\"},\"terms\":\"fire\"}"
+    );
+  }
+
   //TODO: confirm if its needed
   @Test
   @Ignore

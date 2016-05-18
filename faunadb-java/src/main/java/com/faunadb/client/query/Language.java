@@ -521,6 +521,24 @@ public final class Language {
     return Expr.fn("remove", ref, "ts", ts, "action", Value(action.getValue()));
   }
 
+   /**
+    * Creates a new Match expression.
+    *
+    * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#sets">FaunaDB Set Functions</a></p>
+    */
+   public static Expr Match(Expr index) {
+     return Expr.fn("match", index);
+   }
+
+  /**
+   * Creates a new Match expression.
+   *
+   * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#sets">FaunaDB Set Functions</a></p>
+   */
+  public static Expr Match(Expr index, Expr term) {
+    return Expr.fn("match", index, "terms", term);
+  }
+
 
   // /**
   //  * Creates a new Difference set.
@@ -631,15 +649,6 @@ public final class Language {
   //  */
   // public static Value Lambda(String argument, Value expr) {
   //   return ObjectV("lambda", StringV(argument), "expr", expr);
-  // }
-
-  // /**
-  //  * Creates a new Match expression.
-  //  *
-  //  * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#sets">FaunaDB Set Functions</a></p>
-  //  */
-  // public static Value Match(Value term, Ref index) {
-  //   return ObjectV("match", term, "index", index);
   // }
 
 
