@@ -697,6 +697,14 @@ public final class Language {
     return Expr.fn("next_id", Null());
   }
 
+  public static Expr Equals(ImmutableList<Expr> values) {
+    return Expr.fn("equals", Arr(values));
+  }
+
+  public static Expr Equals(Expr... values) {
+    return Equals(ImmutableList.copyOf(values));
+  }
+
   // /**
   //  * Creates a new Select expression.
   //  *
@@ -830,22 +838,6 @@ public final class Language {
   //  */
   // public static Value Not(Value term) {
   //   return ObjectV("not", term);
-  // }
-
-  // /**
-  //  * Creates a new Equals expression.
-  //  *
-  //  * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#misc_functions">FaunaDB Miscellaneous Functions</a></p>
-  //  */
-  // public static Value Equals(ImmutableList<Value> terms) {
-  //   return ObjectV("equals", ArrayV(terms));
-  // }
-
-  // /**
-  //  * Creates a new Equals expression operating on the given terms.
-  //  */
-  // public static Value Equals(Value... terms) {
-  //   return Equals(ImmutableList.copyOf(terms));
   // }
 
   // /**

@@ -565,6 +565,12 @@ public class SerializationSpec {
     assertJson(NextId(), "{\"next_id\":null}");
   }
 
+  @Test
+  public void shouldSerializeEquals() throws Exception {
+    assertJson(Equals(Value("fire"), Value("fire")), "{\"equals\":[\"fire\",\"fire\"]}");
+    assertJson(Equals(ImmutableList.of(Value("fire"), Value("fire"))), "{\"equals\":[\"fire\",\"fire\"]}");
+  }
+
   //TODO: confirm if its needed
   @Test
   @Ignore
