@@ -347,6 +347,16 @@ public class SerializationSpec {
 
   }
 
+  @Test
+  public void shouldSerializeUpdate() throws Exception {
+    assertJson(
+      Update(
+        Ref("databases/annuvin"),
+        Obj("name", Value("llyr"))
+      ), "{\"update\":{\"@ref\":\"databases/annuvin\"},\"params\":{\"object\":{\"name\":\"llyr\"}}}");
+
+  }
+
   //TODO: confirm if its needed
   @Test
   @Ignore

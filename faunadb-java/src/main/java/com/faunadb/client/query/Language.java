@@ -476,6 +476,16 @@ public final class Language {
     return Expr.fn("create", ref, "params", params);
   }
 
+  /**
+   * Creates a new Update expression.
+   * <p>
+   * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#write_functions">FaunaDB Write Functions</a></p>
+   */
+  public static Expr Update(Expr ref, Expr params) {
+    return Expr.fn("update", ref, "params", params);
+  }
+
+
   // /**
   //  * Creates a new Insert expression.
   //  *
@@ -672,14 +682,6 @@ public final class Language {
   //   return Union(ImmutableList.copyOf(sets));
   // }
 
-  // /**
-  //  * Creates a new Update expression.
-  //  *
-  //  * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#write_functions">FaunaDB Write Functions</a></p>
-  //  */
-  // public static Value Update(Value ref, Value params) {
-  //   return ObjectV("update", ref, "params", params);
-  // }
 
   // /**
   //  * Creates a new Var expression.
