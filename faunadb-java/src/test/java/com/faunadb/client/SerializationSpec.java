@@ -649,6 +649,18 @@ public class SerializationSpec {
     assertJson(LTE(ImmutableList.of(Value(1), Value(2), Value(2))),"{\"lte\":[1,2,2]}");
   }
 
+  @Test
+  public void shouldSerializeGT() throws Exception {
+    assertJson(GT(Value(3), Value(2), Value(1)),"{\"gt\":[3,2,1]}");
+    assertJson(GT(ImmutableList.of(Value(3), Value(2), Value(1))),"{\"gt\":[3,2,1]}");
+  }
+
+  @Test
+  public void shouldSerializeGTE() throws Exception {
+    assertJson(GTE(Value(3), Value(2), Value(2)),"{\"gte\":[3,2,2]}");
+    assertJson(GTE(ImmutableList.of(Value(3), Value(2), Value(2))),"{\"gte\":[3,2,2]}");
+  }
+
   private void assertJson(Expr expr, String jsonString) throws JsonProcessingException {
     assertThat(json.writeValueAsString(expr),
       equalTo(jsonString));
