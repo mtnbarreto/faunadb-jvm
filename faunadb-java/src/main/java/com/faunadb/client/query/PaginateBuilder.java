@@ -105,7 +105,7 @@ public final class PaginateBuilder {
   /**
    * Builds the {@link Value} to be used to compose a Query.
    */
-  public Value build() {
+  public Expr build() {
     ImmutableMap.Builder<String, Value> rv = ImmutableMap.builder();
     rv.put("paginate", resource);
     if (ts.isPresent()) {
@@ -133,6 +133,6 @@ public final class PaginateBuilder {
       rv.put("sources", Value.BooleanV.create(sources));
     }
 
-    return Value.ObjectV.create(rv.build());
+    return new Expr(Value.ObjectV.create(rv.build()));
   }
 }

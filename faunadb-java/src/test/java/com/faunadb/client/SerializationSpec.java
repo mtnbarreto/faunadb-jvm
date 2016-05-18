@@ -280,6 +280,37 @@ public class SerializationSpec {
     );
   }
 
+  //FIXME: should review the builder. Make it more composable?
+  @Test
+  public void shouldSerializePaginate() throws Exception {
+    assertJson(
+      Paginate(Ref("databases")).build(),
+      "{\"paginate\":{\"@ref\":\"databases\"}}"
+    );
+
+    assertJson(
+      Paginate(Ref("databases"))
+        .withCursor(After(Ref("databases/test")))
+        .withEvents(true)
+        .withSources(true)
+        .withTs(10L)
+        .withSize(2)
+        .build(),
+      "{\"paginate\":{\"@ref\":\"databases\"},\"ts\":10,\"after\":{\"@ref\":\"databases/test\"},\"size\":2,\"events\":true,\"sources\":true}"
+    );
+
+    assertJson(
+      Paginate(Ref("databases"))
+        .withCursor(Before(Ref("databases/test")))
+        .withEvents(false)
+        .withSources(false)
+        .withTs(10L)
+        .withSize(2)
+        .build(),
+      "{\"paginate\":{\"@ref\":\"databases\"},\"ts\":10,\"before\":{\"@ref\":\"databases/test\"},\"size\":2}"
+    );
+  }
+
   //TODO: confirm if its needed
   @Test
   @Ignore

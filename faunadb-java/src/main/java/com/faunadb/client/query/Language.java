@@ -400,6 +400,36 @@ public final class Language {
     return Expr.fn("get", ref);
   }
 
+  /**
+   * Creates a new Paginate expression builder.
+   *
+   * @see PaginateBuilder
+   * <p>
+   * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#read_functions">FaunaDB Read Functions</a></p>
+   */
+  public static PaginateBuilder Paginate(Expr resource) {
+    return PaginateBuilder.create(resource);
+  }
+
+  /**
+   * Creates a new Before cursor.
+   *
+   * @see Cursor
+   */
+  public static Cursor.Before Before(Expr value) {
+    return Cursor.Before.create(value);
+  }
+
+  /**
+   * Creates a new After cursor.
+   *
+   * @see Cursor
+   */
+  public static Cursor.After After(Expr value) {
+    return Cursor.After.create(value);
+  }
+
+
   // /**
   //  * Creates a new Exists expression.
   //  *
@@ -583,16 +613,6 @@ public final class Language {
   //   return ObjectV("match", term, "index", index);
   // }
 
-  // /**
-  //  * Creates a new Paginate expression builder.
-  //  *
-  //  * @see PaginateBuilder
-  //  *
-  //  * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#read_functions">FaunaDB Read Functions</a></p>
-  //  */
-  // public static PaginateBuilder Paginate(Value resource) {
-  //   return PaginateBuilder.create(resource);
-  // }
 
   // /**
   //  * Creates a new Quote expression.
@@ -658,24 +678,6 @@ public final class Language {
   //  */
   // public static Value Var(String variable) {
   //   return ObjectV("var", StringV(variable));
-  // }
-
-  // /**
-  //  * Creates a new Before cursor.
-  //  *
-  //  * @see Cursor
-  //  */
-  // public static Cursor.Before Before(Value value) {
-  //   return Cursor.Before.create(value);
-  // }
-
-  // /**
-  //  * Creates a new After cursor.
-  //  *
-  //  * @see Cursor
-  //  */
-  // public static Cursor.After After(Value value) {
-  //   return Cursor.After.create(value);
   // }
 
   // /**
