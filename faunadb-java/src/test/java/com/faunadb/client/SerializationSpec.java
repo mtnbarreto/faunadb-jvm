@@ -296,7 +296,8 @@ public class SerializationSpec {
         .withTs(10L)
         .withSize(2)
         .build(),
-      "{\"paginate\":{\"@ref\":\"databases\"},\"ts\":10,\"after\":{\"@ref\":\"databases/test\"},\"size\":2,\"events\":true,\"sources\":true}"
+      "{\"paginate\":{\"@ref\":\"databases\"},\"ts\":10,\"after\":{\"@ref\":\"databases/test\"}," +
+        "\"size\":2,\"events\":true,\"sources\":true}"
     );
 
     assertJson(
@@ -354,6 +355,18 @@ public class SerializationSpec {
         Ref("databases/annuvin"),
         Obj("name", Value("llyr"))
       ), "{\"update\":{\"@ref\":\"databases/annuvin\"},\"params\":{\"object\":{\"name\":\"llyr\"}}}");
+
+  }
+
+  @Test
+  public void shouldSerializeReplace() throws Exception {
+    assertJson(
+      Replace(
+        Ref("classes/spells/104979509696660483"),
+        Obj("data",
+          Obj("name", Value("Mountain's Thunder")))
+      ), "{\"replace\":{\"@ref\":\"classes/spells/104979509696660483\"}," +
+        "\"params\":{\"object\":{\"data\":{\"object\":{\"name\":\"Mountain's Thunder\"}}}}}");
 
   }
 

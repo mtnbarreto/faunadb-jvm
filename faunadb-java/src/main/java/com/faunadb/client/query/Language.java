@@ -485,6 +485,14 @@ public final class Language {
     return Expr.fn("update", ref, "params", params);
   }
 
+   /**
+    * Creates a new Replace expression.
+    *
+    * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#write_functions">FaunaDB Write Functions</a></p>
+    */
+   public static Expr Replace(Expr ref, Expr params) {
+     return Expr.fn("replace", ref, "params", params);
+   }
 
   // /**
   //  * Creates a new Insert expression.
@@ -643,14 +651,6 @@ public final class Language {
   //   return ObjectV("quote", expression);
   // }
 
-  // /**
-  //  * Creates a new Replace expression.
-  //  *
-  //  * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#write_functions">FaunaDB Write Functions</a></p>
-  //  */
-  // public static Value Replace(Value ref, Value obj) {
-  //   return ObjectV("replace", ref, "params", obj);
-  // }
 
   // /**
   //  * Creates a new Select expression.
