@@ -232,6 +232,15 @@ public class SerializationSpec {
       ), "{\"filter\":{\"lambda\":\"x\",\"expr\":{\"var\":\"x\"}},\"collection\":[true,false]}");
   }
 
+  @Test
+  public void shouldSerializeTake() throws Exception {
+    assertJson(
+      Take(
+        Value(2),
+        Arr(Value(1), Value(2), Value(3))
+      ), "{\"take\":2,\"collection\":[1,2,3]}"
+    );
+  }
 
   //TODO: confirm if its needed
   @Test

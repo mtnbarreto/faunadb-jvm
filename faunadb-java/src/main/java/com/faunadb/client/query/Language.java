@@ -351,6 +351,15 @@ public final class Language {
     return Expr.fn("filter", lambda, "collection", collection);
   }
 
+  /**
+   * Creates a new Take expression.
+   *
+   * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#collection_functions">FaunaDB Collection Functions</a>
+   */
+  public static Expr Take(Expr num, Expr collection) {
+    return Expr.fn("take", num, "collection", collection);
+  }
+
 
   // /**
   //  * Creates a new Exists expression.
