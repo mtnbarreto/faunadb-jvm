@@ -7,7 +7,6 @@ import com.faunadb.client.query.Path;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.time.Instant;
@@ -608,21 +607,10 @@ public class SerializationSpec {
     );
   }
 
-  //TODO: confirm if its needed
   @Test
-  @Ignore
-  public void serializeQuote() throws Exception {
-
-  }
-
-  @Test
-  @Ignore
-  public void testSerializeSetExpr() throws Exception {
-  }
-
-  @Test
-  @Ignore
-  public void validateNull() throws Exception {
+  public void shouldSerializeAdd() throws Exception {
+    assertJson(Add(Value(100), Value(10)),"{\"add\":[100,10]}");
+    assertJson(Add(ImmutableList.of(Value(100), Value(10))),"{\"add\":[100,10]}");
   }
 
   private void assertJson(Expr expr, String jsonString) throws JsonProcessingException {

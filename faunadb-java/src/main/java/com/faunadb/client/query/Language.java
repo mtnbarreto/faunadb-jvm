@@ -742,22 +742,21 @@ public final class Language {
     return Expr.fn("select", Arr(pathValueBuilder.build()), "from", from);
   }
 
+  /**
+   * Creates a new Add expression.
+   * <p>
+   * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#misc_functions">FaunaDB Miscellaneous Functions</a></p>
+   */
+  public static Expr Add(ImmutableList<Expr> terms) {
+    return Expr.fn("add", Arr(terms));
+  }
 
-  // /**
-  //  * Creates a new Add expression.
-  //  *
-  //  * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#misc_functions">FaunaDB Miscellaneous Functions</a></p>
-  //  */
-  // public static Value Add(ImmutableList<Value> terms) {
-  //   return ObjectV("add", ArrayV(terms));
-  // }
-
-  // /**
-  //  * Creates a new Add expression operating on the given terms.
-  //  */
-  // public static Value Add(Value... terms) {
-  //   return Add(ImmutableList.copyOf(terms));
-  // }
+   /**
+    * Creates a new Add expression operating on the given terms.
+    */
+   public static Expr Add(Expr... terms) {
+     return Add(ImmutableList.copyOf(terms));
+   }
 
   // /**
   //  * Creates a new Subtract expression.
