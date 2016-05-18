@@ -807,37 +807,21 @@ public final class Language {
   }
 
 
-  // /**
-  //  * Creates a new Modulo expression.
-  //  *
-  //  * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#misc_functions">FaunaDB Miscellaneous Functions</a></p>
-  //  */
-  // public static Value Modulo(ImmutableList<Value> terms) {
-  //   return ObjectV("modulo", ArrayV(terms));
-  // }
+  /**
+   * Creates a new Modulo expression.
+   * <p>
+   * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#misc_functions">FaunaDB Miscellaneous Functions</a></p>
+   */
+  public static Expr Modulo(ImmutableList<Expr> terms) {
+    return Expr.fn("modulo", Arr(terms));
+  }
 
-  // /**
-  //  * Creates a new Modulo expression operating on the given terms.
-  //  */
-  // public static Value Modulo(Value... terms) {
-  //   return Modulo(ImmutableList.copyOf(terms));
-  // }
-
-  // /**
-  //  * Creates a new And expression.
-  //  *
-  //  * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#misc_functions">FaunaDB Miscellaneous Functions</a></p>
-  //  */
-  // public static Value And(ImmutableList<Value> terms) {
-  //   return ObjectV("and", ArrayV(terms));
-  // }
-
-  // /**
-  //  * Creates a new And expression operating on the given terms.
-  //  */
-  // public static Value And(Value... terms) {
-  //   return And(ImmutableList.copyOf(terms));
-  // }
+  /**
+   * Creates a new Modulo expression operating on the given terms.
+   */
+  public static Expr Modulo(Expr... terms) {
+    return Modulo(ImmutableList.copyOf(terms));
+  }
 
   // /**
   //  * Creates a new Or expression.

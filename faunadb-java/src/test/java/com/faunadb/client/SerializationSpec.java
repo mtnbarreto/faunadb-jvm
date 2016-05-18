@@ -631,6 +631,12 @@ public class SerializationSpec {
     assertJson(Divide(ImmutableList.of(Value(100), Value(10))),"{\"divide\":[100,10]}");
   }
 
+  @Test
+  public void shouldSerializeModulo() throws Exception {
+    assertJson(Modulo(Value(100), Value(10)),"{\"modulo\":[100,10]}");
+    assertJson(Modulo(ImmutableList.of(Value(100), Value(10))),"{\"modulo\":[100,10]}");
+  }
+
   private void assertJson(Expr expr, String jsonString) throws JsonProcessingException {
     assertThat(json.writeValueAsString(expr),
       equalTo(jsonString));
