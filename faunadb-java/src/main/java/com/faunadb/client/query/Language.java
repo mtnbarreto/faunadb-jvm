@@ -14,11 +14,11 @@ import static java.lang.String.format;
 
 /**
  * Helper methods for the FaunaDB query language. This class is intended to be statically imported into your code:
- *
+ * <p>
  * <p>{@code import static com.faunadb.client.query.Language.*;}</p>
- *
+ * <p>
  * <p>Each of these helper methods constructs a {@link Value}, which can then be composed with other helper methods.
- *
+ * <p>
  * <h3>Examples:</h3>
  * <pre>{@code Value existsValue = Exists(Ref("some/ref"));
  * Value createValue = Create(Ref("classes/some_class"), Quote(ObjectV("data", ObjectV("some", StringV("field")))));
@@ -26,7 +26,8 @@ import static java.lang.String.format;
  */
 public final class Language {
 
-  private Language() {}
+  private Language() {
+  }
 
   /**
    * Enumeration for time units. Used by <a href="https://faunadb.com/documentation/queries#time_functions">FaunaDB Time Functions</a>.
@@ -53,7 +54,10 @@ public final class Language {
    */
   public static final class Action {
     private final String value;
-    public final String getValue() { return value; }
+
+    public final String getValue() {
+      return value;
+    }
 
     Action(String value) {
       this.value = value;
@@ -67,7 +71,7 @@ public final class Language {
 
   /**
    * Creates a new Ref value.
-   *
+   * <p>
    * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#values">FaunaDB Values</a></p>
    */
   public static Expr Ref(String ref) {
@@ -76,7 +80,7 @@ public final class Language {
 
   /**
    * Creates a new Ref value.
-   *
+   * <p>
    * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#values">FaunaDB Values</a></p>
    */
   public static Expr Ref(Expr classRef, String id) {
@@ -85,7 +89,7 @@ public final class Language {
 
   /**
    * Creates a new String value.
-   *
+   * <p>
    * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#values">FaunaDB Values</a></p>
    */
   public static Expr Value(String value) {
@@ -94,7 +98,7 @@ public final class Language {
 
   /**
    * Creates a new Long value.
-   *
+   * <p>
    * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#values">FaunaDB Values</a></p>
    */
   public static Expr Value(long value) {
@@ -103,7 +107,7 @@ public final class Language {
 
   /**
    * Create aa new Double value.
-   *
+   * <p>
    * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#values">FaunaDB Values</a></p>
    */
   public static Expr Value(double value) {
@@ -112,7 +116,7 @@ public final class Language {
 
   /**
    * Creates a new Boolean value.
-   *
+   * <p>
    * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#values">FaunaDB Values</a></p>
    */
   public static Expr Value(boolean value) {
@@ -121,7 +125,7 @@ public final class Language {
 
   /**
    * Creates a new Timestamp value.
-   *
+   * <p>
    * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#values">FaunaDB Values</a></p>
    */
   public static Expr Value(Instant value) {
@@ -130,7 +134,7 @@ public final class Language {
 
   /**
    * Creates a new Date value.
-   *
+   * <p>
    * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#values">FaunaDB Values</a></p>
    */
   public static Expr Value(LocalDate value) {
@@ -139,7 +143,7 @@ public final class Language {
 
   /**
    * Creates a null value
-   *
+   * <p>
    * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#values">FaunaDB Values</a></p>
    */
   public static Expr Null() {
@@ -150,7 +154,7 @@ public final class Language {
 
   /**
    * Creates a new Object expression, wrapping the provided dictionary of values.
-   *
+   * <p>
    * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#values">FaunaDB Values</a></p>
    */
   public static Expr Obj(ImmutableMap<String, Expr> values) {
@@ -163,7 +167,7 @@ public final class Language {
 
   /**
    * Creates a new empty Object expression.
-   *
+   * <p>
    * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#basic_forms">FaunaDB Basic Forms</a>
    */
   public static Expr Obj() {
@@ -172,7 +176,7 @@ public final class Language {
 
   /**
    * Creates a new Object expression containing the given entries.
-   *
+   * <p>
    * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#values">FaunaDB Values</a></p>
    */
   public static Expr Obj(String k1, Expr v1) {
@@ -181,7 +185,7 @@ public final class Language {
 
   /**
    * Creates a new Object expression containing the given entries.
-   *
+   * <p>
    * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#values">FaunaDB Values</a></p>
    */
   public static Expr Obj(String k1, Expr v1, String k2, Expr v2) {
@@ -190,7 +194,7 @@ public final class Language {
 
   /**
    * Creates a new Object expression containing the given entries.
-   *
+   * <p>
    * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#values">FaunaDB Values</a></p>
    */
   public static Expr Obj(String k1, Expr v1, String k2, Expr v2, String k3, Expr v3) {
@@ -199,7 +203,7 @@ public final class Language {
 
   /**
    * Creates a new Object expression containing the given entries.
-   *
+   * <p>
    * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#values">FaunaDB Values</a></p>
    */
   public static Expr Obj(String k1, Expr v1, String k2, Expr v2, String k3, Expr v3, String k4, Expr v4) {
@@ -208,7 +212,7 @@ public final class Language {
 
   /**
    * Creates a new Object expression containing the given entries.
-   *
+   * <p>
    * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#values">FaunaDB Values</a></p>
    */
   public static Expr Obj(String k1, Expr v1, String k2, Expr v2, String k3, Expr v3, String k4, Expr v4, String k5, Expr v5) {
@@ -217,7 +221,7 @@ public final class Language {
 
   /**
    * Creates a new Array expression containing the provided list of values.
-   *
+   * <p>
    * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#values">FaunaDB Values</a></p>
    */
   public static Expr Arr(ImmutableList<Expr> values) {
@@ -230,7 +234,7 @@ public final class Language {
 
   /**
    * Creates a new Array expression containing the given entries.
-   *
+   * <p>
    * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#values">FaunaDB Values</a></p>
    */
   public static Expr Arr(Expr... values) {
@@ -253,7 +257,7 @@ public final class Language {
 
   /**
    * Creates a new Let expression.
-   *
+   * <p>
    * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#basic_forms">FaunaDB Basic Forms</a>
    */
   public static LetBinding Let(String v1, Expr d1) {
@@ -283,7 +287,7 @@ public final class Language {
 
   /**
    * Creates a new Var expression.
-   *
+   * <p>
    * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#basic_forms">FaunaDB Basic Forms</a>
    */
   public static Expr Var(String variable) {
@@ -292,7 +296,7 @@ public final class Language {
 
   /**
    * Creates a new If expression.
-   *
+   * <p>
    * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#basic_forms">FaunaDB Basic Forms</a>
    */
   public static Expr If(Expr condition, Expr thenExpr, Expr elseExpr) {
@@ -301,7 +305,7 @@ public final class Language {
 
   /**
    * Creates a new Do expression.
-   *
+   * <p>
    * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#basic_forms">FaunaDB Basic Forms</a>
    */
   public static Expr Do(ImmutableList<Expr> expressions) {
@@ -317,7 +321,7 @@ public final class Language {
 
   /**
    * Creates a new Lambda expression.
-   *
+   * <p>
    * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#basic_forms">FaunaDB Basic Forms</a>
    */
   public static Expr Lambda(String var, Expr expr) {
@@ -326,7 +330,7 @@ public final class Language {
 
   /**
    * Creates a new Map expression.
-   *
+   * <p>
    * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#collection_functions">FaunaDB Collection Functions</a>
    */
   public static Expr Map(Expr lambda, Expr collection) {
@@ -335,7 +339,7 @@ public final class Language {
 
   /**
    * Creates a new Foreach expression.
-   *
+   * <p>
    * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#collection_functions">FaunaDB Collection Functions</a>
    */
   public static Expr Foreach(Expr lambda, Expr collection) {
@@ -344,7 +348,7 @@ public final class Language {
 
   /**
    * Creates a new Filter expression.
-   *
+   * <p>
    * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#collection_functions">FaunaDB Collection Functions</a>
    */
   public static Expr Filter(Expr lambda, Expr collection) {
@@ -353,7 +357,7 @@ public final class Language {
 
   /**
    * Creates a new Take expression.
-   *
+   * <p>
    * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#collection_functions">FaunaDB Collection Functions</a>
    */
   public static Expr Take(Expr num, Expr collection) {
@@ -362,11 +366,20 @@ public final class Language {
 
   /**
    * Creates a new Drop expression.
-   *
+   * <p>
    * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#collection_functions">FaunaDB Collection Functions</a>
    */
   public static Expr Drop(Expr num, Expr collection) {
     return Expr.fn("drop", num, "collection", collection);
+  }
+
+  /**
+   * Creates a new Prepend expression.
+   * <p>
+   * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#collection_functions">FaunaDB Collection Functions</a>
+   */
+  public static Expr Prepend(Expr elements, Expr collection) {
+    return Expr.fn("prepend", elements, "collection", collection);
   }
 
 

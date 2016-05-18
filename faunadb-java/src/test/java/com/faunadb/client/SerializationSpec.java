@@ -251,6 +251,16 @@ public class SerializationSpec {
       ), "{\"drop\":2,\"collection\":[1,2,3]}"
     );
   }
+  
+  @Test
+  public void shouldSerializePrepend() throws Exception {
+    assertJson(
+      Prepend(
+        Arr(Value(1), Value(2), Value(3)),
+        Arr(Value(4), Value(5), Value(6))
+      ), "{\"prepend\":[1,2,3],\"collection\":[4,5,6]}"
+    );
+  }
 
   //TODO: confirm if its needed
   @Test
