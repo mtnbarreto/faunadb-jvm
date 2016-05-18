@@ -667,6 +667,12 @@ public class SerializationSpec {
     assertJson(And(ImmutableList.of(Value(true), Value(true), Value(false))),"{\"and\":[true,true,false]}");
   }
 
+  @Test
+  public void shouldSerializeOr() throws Exception {
+    assertJson(Or(Value(true), Value(true), Value(false)),"{\"or\":[true,true,false]}");
+    assertJson(Or(ImmutableList.of(Value(true), Value(true), Value(false))),"{\"or\":[true,true,false]}");
+  }
+
   private void assertJson(Expr expr, String jsonString) throws JsonProcessingException {
     assertThat(json.writeValueAsString(expr),
       equalTo(jsonString));

@@ -863,30 +863,12 @@ public final class Language {
     return And(ImmutableList.copyOf(values));
   }
 
-  // /**
-  //  * Creates a new Or expression.
-  //  *
-  //  * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#misc_functions">FaunaDB Miscellaneous Functions</a></p>
-  //  */
-  // public static Value Or(ImmutableList<Value> terms) {
-  //   return ObjectV("or", ArrayV(terms));
-  // }
+  public static Expr Or(ImmutableList<Expr> values) {
+    return Expr.fn("or", Arr(values));
+  }
 
-  // /**
-  //  * Creates a new Or expression operating on the given terms.
-  //  */
-  // public static Value Or(Value... terms) {
-  //   return Or(ImmutableList.copyOf(terms));
-  // }
-
-  // /**
-  //  * Creates a new Not expression.
-  //  *
-  //  * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#misc_functions">FaunaDB Miscellaneous Functions</a></p>
-  //  */
-  // public static Value Not(Value term) {
-  //   return ObjectV("not", term);
-  // }
-
+  public static Expr Or(Expr... values) {
+    return Or(ImmutableList.copyOf(values));
+  }
 
 }
