@@ -311,6 +311,19 @@ public class SerializationSpec {
     );
   }
 
+  @Test
+  public void shouldSerializeExists() throws Exception {
+    assertJson(
+      Exists(Ref("classes/spells/104979509692858368")),
+      "{\"exists\":{\"@ref\":\"classes/spells/104979509692858368\"}}"
+    );
+
+    assertJson(
+      Exists(Ref("classes/spells/104979509692858368"), Value(Instant.EPOCH)),
+      "{\"exists\":{\"@ref\":\"classes/spells/104979509692858368\"},\"ts\":{\"@ts\":\"1970-01-01T00:00:00Z\"}}"
+    );
+  }
+
   //TODO: confirm if its needed
   @Test
   @Ignore

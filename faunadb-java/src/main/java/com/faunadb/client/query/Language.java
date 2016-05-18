@@ -430,14 +430,23 @@ public final class Language {
   }
 
 
-  // /**
-  //  * Creates a new Exists expression.
-  //  *
-  //  * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#read_functions">FaunaDB Read Functions</a></p>
-  //  */
-  // public static Value Exists(Value ref) {
-  //   return ObjectV("exists", ref);
-  // }
+  /**
+   * Creates a new Exists expression.
+   * <p>
+   * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#read_functions">FaunaDB Read Functions</a></p>
+   */
+  public static Expr Exists(Expr ref) {
+    return Expr.fn("exists", ref);
+  }
+
+  /**
+   * Creates a new Exists expression.
+   * <p>
+   * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#read_functions">FaunaDB Read Functions</a></p>
+   */
+  public static Expr Exists(Expr ref, Expr timestamp) {
+    return Expr.fn("exists", ref, "ts", timestamp);
+  }
 
   // /**
   //  * Creates a new Count expression.
