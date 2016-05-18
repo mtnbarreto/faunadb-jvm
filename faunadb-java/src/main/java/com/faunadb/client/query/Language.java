@@ -675,6 +675,15 @@ public final class Language {
     return Expr.fn("time", str);
   }
 
+  /**
+   * Creates a new Epoch expression.
+   * <p>
+   * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#time_functions">FaunaDB Time and Date Functions</a></p>
+   */
+  public static Expr Epoch(Expr num, TimeUnit unit) {
+    return Expr.fn("epoch", num, "unit", Value(unit.getValue()));
+  }
+
   // /**
   //  * Creates a new Select expression.
   //  *
@@ -840,24 +849,6 @@ public final class Language {
   //   return ObjectV("contains", ArrayV(pathValueBuilder.build()), "in", in);
   // }
 
-
-  // /**
-  //  * Creates a new Epoch expression.
-  //  *
-  //  * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#time_functions">FaunaDB Time and Date Functions</a></p>
-  //  */
-  // public static Value Epoch(Value num, TimeUnit unit) {
-  //   return ObjectV("epoch", num, "unit", StringV(unit.getValue()));
-  // }
-
-  // /**
-  //  * Creates a new Epoch expression.
-  //  *
-  //  * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#time_functions">FaunaDB Time and Date Functions</a></p>
-  //  */
-  // public static Value Epoch(Value num, String unit) {
-  //   return ObjectV("epoch", num, "unit", StringV(unit));
-  // }
 
   // /**
   //  * Creates a new Date expression.

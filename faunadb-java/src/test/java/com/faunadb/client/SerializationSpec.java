@@ -549,6 +549,12 @@ public class SerializationSpec {
     );
   }
 
+  //FIXME: check time unit use case. Is it composable?
+  @Test
+  public void shouldSerializeEpoch() throws Exception {
+    assertJson(Epoch(Value(0), TimeUnit.SECOND), "{\"epoch\":0,\"unit\":\"second\"}");
+  }
+
   //TODO: confirm if its needed
   @Test
   @Ignore
