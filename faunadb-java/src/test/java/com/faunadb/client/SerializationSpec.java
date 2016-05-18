@@ -3,6 +3,7 @@ package com.faunadb.client;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.faunadb.client.query.Expr;
+import com.faunadb.client.query.Path;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import org.junit.Before;
@@ -569,6 +570,24 @@ public class SerializationSpec {
   public void shouldSerializeEquals() throws Exception {
     assertJson(Equals(Value("fire"), Value("fire")), "{\"equals\":[\"fire\",\"fire\"]}");
     assertJson(Equals(ImmutableList.of(Value("fire"), Value("fire"))), "{\"equals\":[\"fire\",\"fire\"]}");
+  }
+
+  //FIXME: check path use case. Is it composable?
+  @Test
+  public void shouldSerializeContains() throws Exception {
+    assertJson(
+      Contains(
+        Path(Path.Object("favorites"), Path.Object("foods")),
+        Obj("favorites",
+          Obj("foods", Arr(
+            Value("crunchings"),
+            Value("munchings"),
+            Value("lunchings")
+          ))
+        )
+      ),
+      "{\"contains\":[\"favorites\",\"foods\"],\"in\":" +
+        "{\"object\":{\"favorites\":{\"object\":{\"foods\":[\"crunchings\",\"munchings\",\"lunchings\"]}}}}}");
   }
 
   //TODO: confirm if its needed

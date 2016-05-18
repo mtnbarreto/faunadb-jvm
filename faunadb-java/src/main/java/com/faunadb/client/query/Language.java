@@ -705,6 +705,29 @@ public final class Language {
     return Equals(ImmutableList.copyOf(values));
   }
 
+  /**
+   * Creates a new Contains expression.
+   * <p>
+   * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#misc_functions">FaunaDB Miscellaneous Functions</a></p>
+   */
+  public static Expr Contains(ImmutableList<Path> path, Expr in) {
+    ImmutableList.Builder<Expr> pathValueBuilder = ImmutableList.builder();
+    for (Path term : path) {
+      pathValueBuilder.add(Expr.create(term.value()));
+    }
+
+    return Expr.fn("contains", Arr(pathValueBuilder.build()), "in", in);
+  }
+
+  /**
+   * Helper for constructing a Path list with the given path terms.
+   *
+   * @see Path
+   */
+  public static ImmutableList<Path> Path(Path... terms) {
+    return ImmutableList.copyOf(terms);
+  }
+
   // /**
   //  * Creates a new Select expression.
   //  *
@@ -840,27 +863,5 @@ public final class Language {
   //   return ObjectV("not", term);
   // }
 
-  // /**
-  //  * Creates a new Contains expression.
-  //  *
-  //  * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#misc_functions">FaunaDB Miscellaneous Functions</a></p>
-  //  */
-  // public static Value Contains(ImmutableList<Path> path, Value in) {
-  //   ImmutableList.Builder<Value> pathValueBuilder = ImmutableList.builder();
-  //   for (Path term : path) {
-  //     pathValueBuilder.add(term.value());
-  //   }
 
-  //   return ObjectV("contains", ArrayV(pathValueBuilder.build()), "in", in);
-  // }
-
-
-  // /**
-  //  * Helper for constructing a Path list with the given path terms.
-  //  *
-  //  * @see Path
-  //  */
-  // public static ImmutableList<Path> Path(Path... terms) {
-  //   return ImmutableList.copyOf(terms);
-  // }
 }
