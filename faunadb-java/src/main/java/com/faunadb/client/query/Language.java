@@ -8,8 +8,11 @@ import com.google.common.collect.ImmutableMap;
 
 import java.time.Instant;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+
+import static java.lang.String.format;
 
 /**
  * Helper methods for the FaunaDB query language. This class is intended to be statically imported into your code:
@@ -71,6 +74,15 @@ public final class Language {
    */
   public static Expr Ref(String ref) {
     return Expr.create(Ref.create(ref));
+  }
+
+  /**
+   * Creates a new Ref value.
+   *
+   * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#values">FaunaDB Values</a></p>
+   */
+  public static Expr Ref(Expr classRef, String id) {
+    return Expr.create(Ref.create(format("%s/%s", classRef.tree().asRef().value(), id)));
   }
 
   /**
@@ -143,8 +155,12 @@ public final class Language {
    *
    * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#values">FaunaDB Values</a></p>
    */
-  public static Expr Obj(Map<String, Value> values) {
-    return Expr.create(ObjectV.create(values));
+  public static Expr Obj(Map<String, Expr> values) {
+    ImmutableMap.Builder<String, Value> innerValues = ImmutableMap.builder();
+    for (Map.Entry<String, Expr> kv : values.entrySet())
+      innerValues.put(kv.getKey(), kv.getValue().tree());
+
+    return Expr.create(ObjectV.create(innerValues.build()));
   }
 
   /**
@@ -161,7 +177,7 @@ public final class Language {
    *
    * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#values">FaunaDB Values</a></p>
    */
-  public static Expr Obj(String k1, Value v1) {
+  public static Expr Obj(String k1, Expr v1) {
     return Expr.create(ObjectV.create(k1, v1));
   }
 
@@ -170,7 +186,7 @@ public final class Language {
    *
    * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#values">FaunaDB Values</a></p>
    */
-  public static Expr Obj(String k1, Value v1, String k2, Value v2) {
+  public static Expr Obj(String k1, Expr v1, String k2, Expr v2) {
     return Expr.create(ObjectV.create(k1, v1, k2, v2));
   }
 
@@ -179,7 +195,7 @@ public final class Language {
    *
    * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#values">FaunaDB Values</a></p>
    */
-  public static Expr Obj(String k1, Value v1, String k2, Value v2, String k3, Value v3) {
+  public static Expr Obj(String k1, Expr v1, String k2, Expr v2, String k3, Expr v3) {
     return Expr.create(ObjectV.create(k1, v1, k2, v2, k3, v3));
   }
 
@@ -188,7 +204,7 @@ public final class Language {
    *
    * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#values">FaunaDB Values</a></p>
    */
-  public static Expr Obj(String k1, Value v1, String k2, Value v2, String k3, Value v3, String k4, Value v4) {
+  public static Expr Obj(String k1, Expr v1, String k2, Expr v2, String k3, Expr v3, String k4, Expr v4) {
     return Expr.create(ObjectV.create(k1, v1, k2, v2, k3, v3, k4, v4));
   }
 
@@ -197,7 +213,7 @@ public final class Language {
    *
    * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#values">FaunaDB Values</a></p>
    */
-  public static Expr Obj(String k1, Value v1, String k2, Value v2, String k3, Value v3, String k4, Value v4, String k5, Value v5) {
+  public static Expr Obj(String k1, Expr v1, String k2, Expr v2, String k3, Expr v3, String k4, Expr v4, String k5, Expr v5) {
     return Expr.create(ObjectV.create(k1, v1, k2, v2, k3, v3, k4, v4, k5, v5));
   }
 
@@ -206,8 +222,12 @@ public final class Language {
    *
    * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#values">FaunaDB Values</a></p>
    */
-  public static Expr Arr(ImmutableList<Value> values) {
-    return Expr.create(ArrayV.create(values));
+  public static Expr Arr(List<Expr> values) {
+    ImmutableList.Builder<Value> innerValues = ImmutableList.builder();
+    for (Expr value : values)
+      innerValues.add(value.tree());
+
+    return Expr.create(ArrayV.create(innerValues.build()));
   }
 
   /**
@@ -215,21 +235,21 @@ public final class Language {
    *
    * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#values">FaunaDB Values</a></p>
    */
-  public static Expr Arr(Value... values) {
-    return Expr.create(ArrayV.create(ImmutableList.copyOf(values)));
+  public static Expr Arr(Expr... values) {
+    return Arr(Arrays.asList(values));
   }
 
   // Basic Forms
 
   public static class LetBinding {
-    private final ImmutableMap<String, Value> bindings;
+    private final ImmutableMap<String, Expr> bindings;
 
-    LetBinding(Map<String, Value> bindings) {
+    LetBinding(Map<String, Expr> bindings) {
       this.bindings = ImmutableMap.copyOf(bindings);
     }
 
-    public Expr in(Value in) {
-      return new Expr(ObjectV.create("let", Expr.escapedMap(bindings), "in", Expr.create(in)));
+    public Expr in(Expr in) {
+      return new Expr(ObjectV.create("let", Expr.escapedMap(Expr.upcast(bindings)), "in", Expr.create(in)));
     }
   }
 
@@ -238,27 +258,27 @@ public final class Language {
    *
    * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#basic_forms">FaunaDB Basic Forms</a>
    */
-  public static LetBinding Let(String v1, Value d1) {
+  public static LetBinding Let(String v1, Expr d1) {
     return new LetBinding(ImmutableMap.of(v1, d1));
   }
 
-  public static LetBinding Let(String v1, Value d1, String v2, Value d2) {
+  public static LetBinding Let(String v1, Expr d1, String v2, Expr d2) {
     return new LetBinding(ImmutableMap.of(v1, d1, v2, d2));
   }
 
-  public static LetBinding Let(String v1, Value d1, String v2, Value d2, String v3, Value d3) {
+  public static LetBinding Let(String v1, Expr d1, String v2, Expr d2, String v3, Expr d3) {
     return new LetBinding(ImmutableMap.of(v1, d1, v2, d2, v3, d3));
   }
 
-  public static LetBinding Let(String v1, Value d1, String v2, Value d2, String v3, Value d3, String v4, Value d4) {
+  public static LetBinding Let(String v1, Expr d1, String v2, Expr d2, String v3, Expr d3, String v4, Expr d4) {
     return new LetBinding(ImmutableMap.of(v1, d1, v2, d2, v3, d3, v4, d4));
   }
 
-  public static LetBinding Let(String v1, Value d1, String v2, Value d2, String v3, Value d3, String v4, Value d4, String v5, Value d5) {
+  public static LetBinding Let(String v1, Expr d1, String v2, Expr d2, String v3, Expr d3, String v4, Expr d4, String v5, Expr d5) {
     return new LetBinding(ImmutableMap.of(v1, d1, v2, d2, v3, d3, v4, d4, v5, d5));
   }
 
-  public static LetBinding Let(Map<String, Value> bindings) {
+  public static LetBinding Let(Map<String, Expr> bindings) {
     return new LetBinding(bindings);
   }
 
@@ -286,14 +306,14 @@ public final class Language {
    *
    * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#basic_forms">FaunaDB Basic Forms</a>
    */
-  public static Expr Do(List<Value> expressions) {
-    return Expr.fn("do", new Expr(ArrayV.create(expressions)));
+  public static Expr Do(List<Expr> expressions) {
+    return Expr.fn("do", new Expr(ArrayV.create(Expr.upcast(ImmutableList.copyOf(expressions)))));
   }
 
   /**
    * Creates a new Do expression with the given terms.
    */
-  public static Expr Do(Value... exprs) {
+  public static Expr Do(Expr... exprs) {
     return Do(ImmutableList.copyOf(exprs));
   }
 

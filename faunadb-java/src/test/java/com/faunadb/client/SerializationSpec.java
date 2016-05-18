@@ -3,7 +3,6 @@ package com.faunadb.client;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.faunadb.client.query.Expr;
-import com.faunadb.client.types.Value;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import org.junit.Before;
@@ -14,7 +13,6 @@ import java.time.Instant;
 import java.time.LocalDate;
 
 import static com.faunadb.client.query.Language.*;
-import static java.lang.String.format;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -29,7 +27,7 @@ public class SerializationSpec {
 
   @Test
   public void shouldSerializeLiteralValues() throws Exception {
-    assertJson(Value(Long.MAX_VALUE), format("%s", Long.MAX_VALUE));
+    assertJson(Value(Long.MAX_VALUE), String.valueOf(Long.MAX_VALUE));
     assertJson(Value("a string"), "\"a string\"");
     assertJson(Value(10), "10");
     assertJson(Value(1.0), "1.0");
@@ -47,7 +45,7 @@ public class SerializationSpec {
       ), "[\"a string\",10]");
 
     assertJson(
-      Arr(ImmutableList.<Value>of(
+      Arr(ImmutableList.of(
         Value("other string"),
         Value(42)
       )), "[\"other string\",42]");
@@ -92,7 +90,7 @@ public class SerializationSpec {
       "{\"object\":{\"k1\":\"v1\",\"k2\":\"v2\",\"k3\":\"v3\",\"k4\":\"v4\",\"k5\":\"v5\"}}");
 
     assertJson(
-      Obj(ImmutableMap.<String, Value>of(
+      Obj(ImmutableMap.of(
         "k1", Value("v1"),
         "k2", Value("v2"))
       ),
@@ -102,6 +100,7 @@ public class SerializationSpec {
   @Test
   public void shouldSerializeRef() throws Exception {
     assertJson(Ref("classes"), "{\"@ref\":\"classes\"}");
+    assertJson(Ref(Ref("classes/people"), "id1"), "{\"@ref\":\"classes/people/id1\"}");
   }
 
   @Test
@@ -162,7 +161,7 @@ public class SerializationSpec {
       ), "{\"let\":{\"v1\":\"x1\",\"v2\":\"x2\",\"v3\":\"x3\",\"v4\":\"x4\",\"v5\":\"x5\"},\"in\":\"x\"}");
 
     assertJson(
-      Let(ImmutableMap.<String, Value>of(
+      Let(ImmutableMap.of(
         "v1", Value("x1"),
         "v2", Value("x2")
         )
@@ -192,7 +191,7 @@ public class SerializationSpec {
       ), "{\"do\":[{\"if\":true,\"then\":\"x\",\"else\":\"y\"},42]}");
 
     assertJson(
-      Do(ImmutableList.<Value>of(
+      Do(ImmutableList.of(
         If(Value(true), Value("xx"), Value("yy")),
         Value(45)
       )), "{\"do\":[{\"if\":true,\"then\":\"xx\",\"else\":\"yy\"},45]}");
