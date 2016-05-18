@@ -643,6 +643,12 @@ public class SerializationSpec {
     assertJson(LT(ImmutableList.of(Value(1), Value(2), Value(3))),"{\"lt\":[1,2,3]}");
   }
 
+  @Test
+  public void shouldSerializeLTE() throws Exception {
+    assertJson(LTE(Value(1), Value(2), Value(2)),"{\"lte\":[1,2,2]}");
+    assertJson(LTE(ImmutableList.of(Value(1), Value(2), Value(2))),"{\"lte\":[1,2,2]}");
+  }
+
   private void assertJson(Expr expr, String jsonString) throws JsonProcessingException {
     assertThat(json.writeValueAsString(expr),
       equalTo(jsonString));

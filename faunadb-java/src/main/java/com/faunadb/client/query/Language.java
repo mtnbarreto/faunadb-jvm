@@ -831,6 +831,14 @@ public final class Language {
     return LT(ImmutableList.copyOf(values));
   }
 
+  public static Expr LTE(ImmutableList<Expr> values) {
+    return Expr.fn("lte", Arr(values));
+  }
+
+  public static Expr LTE(Expr... values) {
+    return LTE(ImmutableList.copyOf(values));
+  }
+
   // /**
   //  * Creates a new Or expression.
   //  *
