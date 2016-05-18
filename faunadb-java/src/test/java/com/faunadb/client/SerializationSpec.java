@@ -445,6 +445,19 @@ public class SerializationSpec {
     );
   }
 
+  @Test
+  public void shouldSerializeDifference() throws Exception {
+    assertJson(
+      Difference(Ref("databases"), Ref("keys")),
+      "{\"difference\":[{\"@ref\":\"databases\"},{\"@ref\":\"keys\"}]}"
+    );
+
+    assertJson(
+      Difference(ImmutableList.of(Ref("databases"), Ref("keys"))),
+      "{\"difference\":[{\"@ref\":\"databases\"},{\"@ref\":\"keys\"}]}"
+    );
+  }
+
   //TODO: confirm if its needed
   @Test
   @Ignore

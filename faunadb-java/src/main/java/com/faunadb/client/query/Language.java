@@ -572,21 +572,21 @@ public final class Language {
   }
 
 
-  // /**
-  //  * Creates a new Difference set.
-  //  *
-  //  * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#sets">FaunaDB Set Functions</a></p>
-  //  */
-  // public static Value Difference(ImmutableList<Value> sets) {
-  //   return ObjectV("difference", ArrayV(sets));
-  // }
+  /**
+   * Creates a new Difference set.
+   * <p>
+   * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#sets">FaunaDB Set Functions</a></p>
+   */
+  public static Expr Difference(ImmutableList<Expr> sets) {
+    return Expr.fn("difference", Arr(sets));
+  }
 
-  // /**
-  //  * Creates a new Difference set expression operating on the given sets.
-  //  */
-  // public static Value Difference(Value... sets) {
-  //   return Difference(ImmutableList.copyOf(sets));
-  // }
+  /**
+   * Creates a new Difference set expression operating on the given sets.
+   */
+  public static Expr Difference(Expr... sets) {
+    return Difference(ImmutableList.copyOf(sets));
+  }
 
   // /**
   //  * Creates a new Do expression.
