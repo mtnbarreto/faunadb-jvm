@@ -360,6 +360,15 @@ public final class Language {
     return Expr.fn("take", num, "collection", collection);
   }
 
+  /**
+   * Creates a new Drop expression.
+   *
+   * <p><b>Reference</b>: <a href="https://faunadb.com/documentation/queries#collection_functions">FaunaDB Collection Functions</a>
+   */
+  public static Expr Drop(Expr num, Expr collection) {
+    return Expr.fn("drop", num, "collection", collection);
+  }
+
 
   // /**
   //  * Creates a new Exists expression.

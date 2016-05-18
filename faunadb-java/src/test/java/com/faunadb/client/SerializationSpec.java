@@ -242,6 +242,16 @@ public class SerializationSpec {
     );
   }
 
+  @Test
+  public void shouldSerializeDrop() throws Exception {
+    assertJson(
+      Drop(
+        Value(2),
+        Arr(Value(1), Value(2), Value(3))
+      ), "{\"drop\":2,\"collection\":[1,2,3]}"
+    );
+  }
+
   //TODO: confirm if its needed
   @Test
   @Ignore
