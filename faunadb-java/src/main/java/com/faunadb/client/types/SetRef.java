@@ -1,7 +1,5 @@
 package com.faunadb.client.types;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.google.common.collect.ImmutableMap;
 
@@ -23,12 +21,18 @@ public class SetRef extends Value.ScalarValue {
     this.parameters = parameters;
   }
 
-  public ImmutableMap<String, Value> parameters() {
+  @Override
+  public ImmutableMap<String, Value> asObject() {
     return parameters;
   }
 
   @Override
+  public Value get(String key) {
+    return parameters.get(key);
+  }
+
+  @Override
   public String toString() {
-    return "SetRef(" + parameters().toString() + ")";
+    return "SetRef(" + parameters.toString() + ")";
   }
 }
